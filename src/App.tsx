@@ -171,22 +171,48 @@ const upcomingProjects = [
 
 const howItWorksSteps = [
   {
-    step: '01',
-    title: 'РЕГИСТРАЦИЯ',
-    subtitle: 'Создайте учетную запись за пару минут',
-    image: '/how-it-works-1.jpg',
-  },
-  {
-    step: '02',
-    title: 'ВЫБОР СТРАТЕГИИ',
-    subtitle: 'Выберите продукт или стратегию под свои цели',
-    image: '/how-it-works-2.jpg',
-  },
-  {
     step: '03',
     title: 'ИНВЕСТИЦИЯ',
-    subtitle: 'Вложите средства и наблюдайте за ростом капитала',
+    subtitle: '',
     image: '/how-it-works-3.jpg',
+  }
+];
+
+const whyIWMItems = [
+  {
+    title: 'НИЗКИЙ ПОРОГ ВХОДА',
+    description: 'Инвестировать можно от $100 и без лишней бюрократии',
+  },
+  {
+    title: 'ПРОЗРАЧНОСТЬ И ДОВЕРИЕ',
+    description: 'Все продукты проходят независимую проверку и аудит',
+  },
+  {
+    title: 'ОБРАЗОВАНИЕ И ПОДДЕРЖКА',
+    description: 'Обучение, вебинары и аналитика для вашего роста как инвестора',
+  },
+];
+
+const gallerySlides = [
+  {
+    category: 'private wealth',
+    title: 'IWM PRIVATE WEALTH',
+    description: 'Расширенные возможности для опытных клиентов',
+  },
+  {
+    category: 'black',
+    title: 'IWM BLACK',
+    description: 'Персональный подход для VIP-клиентов',
+  },
+  {
+    category: 'premium',
+    title: 'IWM PREMIUM',
+    description: 'Эксклюзивные предложения для премиум-сегмента',
+  },
+  {
+    category: 'global',
+    title: 'IWM GLOBAL',
+    description: 'Доступ к международным рынкам и активам',
   }
 ];
 
@@ -240,6 +266,7 @@ const UpcomingProjectCard = ({ project }) => {
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
@@ -258,6 +285,20 @@ function App() {
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -1536]); // 3 cards * (480px height + 32px gap)
   const y2 = useTransform(scrollYProgress, [0, 1], [-1536, 0]);
   const timelineY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+
+  const [currentGallerySlide, setCurrentGallerySlide] = useState(0);
+
+  const whyIWMRef = useRef(null);
+  const { scrollYProgress: whyIWMScrollYProgress } = useScroll({
+    target: whyIWMRef,
+    offset: ['start start', 'end end'],
+  });
+
+  const timelineYWhy = useTransform(whyIWMScrollYProgress, [0, 1], ['5%', '80%']);
+  const itemOpacity1 = useTransform(whyIWMScrollYProgress, [0, 0.33], [1, 0.3]);
+  const itemOpacity2 = useTransform(whyIWMScrollYProgress, [0.33, 0.66], [1, 0.3]);
+  const itemOpacity3 = useTransform(whyIWMScrollYProgress, [0.66, 1], [1, 0.3]);
+
 
   return (
     <div className="min-h-screen bg-white text-gray-800 p-4">
@@ -487,53 +528,174 @@ function App() {
 
       <section className="bg-[#EFEFEF] py-20">
         <div className="container mx-auto px-6">
-          <div className="flex justify-between items-center pt-8">
-            <div>
-              <h2 className="text-5xl font-light">Как это работает?</h2>
-              <p className="text-lg text-gray-500">Всего 3 простых шага</p>
+          <div className="flex justify-between items-start mb-20">
+            <div className="w-full">
+              <h2 className="text-5xl font-light text-center">Как это работает?</h2>
+              <p className="text-lg text-gray-500 mt-2 text-center">Всего 3 простых шага</p>
             </div>
-            <img src="/LOGO.svg" alt="Company Logo" className="h-12" />
+            <img src="/LOGO.svg" alt="Company Logo" className="h-8 flex-shrink-0" />
           </div>
 
-          <div className="mt-20">
-            <div className="relative w-full">
-              {/* Timeline line */}
-              <div className="absolute top-2 left-0 h-0.5 w-full bg-gray-300"></div>
-              {/* Progress line */}
-              <div className="absolute top-2 left-0 h-0.5 w-1/3 bg-black"></div>
-              {/* Circles */}
-              <div className="flex justify-between items-center w-full">
-                <div className="w-4 h-4 rounded-full bg-black z-10"></div>
-                <div className="w-4 h-4 rounded-full bg-black z-10"></div>
-                <div className="w-4 h-4 rounded-full bg-black z-10"></div>
-              </div>
+          <div className="grid md:grid-cols-2 gap-24 items-center">
+            {/* Left Column: Steps */}
+            <div className="space-y-12">
+              {howItWorksSteps.map((step, index) => {
+                const isActive = index === 0;
+                return (
+                  <div key={index}>
+                    <div className="flex items-start">
+                      <span className={`text-xl mr-6 font-light ${isActive ? 'text-black' : 'text-gray-400'}`}>{step.step}</span>
+                      <div>
+                        <h3 className={`text-2xl font-bold ${isActive ? 'text-black' : 'text-gray-400'}`}>{step.title}</h3>
+                        {step.subtitle && <p className={`mt-2 text-base ${isActive ? 'text-gray-800' : 'text-gray-500'}`}>{step.subtitle}</p>}
+                      </div>
+                    </div>
+                    <div className="pl-12 mt-4 h-3">
+                      {isActive && (
+                        <div className="w-full h-px bg-black relative">
+                          <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-black"></div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )
+              })}
             </div>
 
-            <div className="mt-8 flex justify-between">
-              <div className="w-1/3 pr-4">
-                <p className="text-gray-400">01</p>
-                <p className="font-bold">РЕГИСТРАЦИЯ</p>
-                <p className="text-sm text-gray-500">Создайте учетную запись за пару минут</p>
+            {/* Right Column: Image and Button */}
+            <div className="relative">
+              <div className="bg-gray-800 h-[600px] w-full">
+                <img src={howItWorksSteps[0].image} alt={howItWorksSteps[0].title} className="w-full h-full object-cover" />
               </div>
-              <div className="w-1/3 px-2">
-                <p className="text-gray-400">02</p>
-                <p className="font-bold">ВЫБОР СТРАТЕГИИ</p>
-                <p className="text-sm text-gray-500">Выберите продукт или стратегию под свои цели</p>
-              </div>
-              <div className="w-1/3 pl-4">
-                <p className="text-gray-400">03</p>
-                <p className="font-bold">ИНВЕСТИЦИЯ</p>
-                <p className="text-sm text-gray-500">Вложите средства и наблюдайте за ростом капитала</p>
+              <div className="flex justify-end mt-8">
+                <button className="border border-black rounded-full px-8 py-3 hover:bg-black hover:text-white transition-colors">
+                  ЗАРЕГИСТРИРОВАТЬСЯ
+                </button>
               </div>
             </div>
-          </div>
-          <div className="text-center mt-20">
-            <button className="border border-black rounded-full px-8 py-3 hover:bg-black hover:text-white transition-colors">
-              ЗАРЕГИСТРИРОВАТЬСЯ
-            </button>
           </div>
         </div>
       </section>
+
+      <section ref={whyIWMRef} className="bg-white py-24 relative h-[250vh]">
+      <div className="sticky top-0 h-screen flex items-center">
+        <div className="container mx-auto px-6 grid grid-cols-2 gap-24">
+          {/* Left Column (Sticky) */}
+          <div className="flex flex-col justify-center h-full relative">
+            <div className="absolute top-1/2 -translate-y-1/2 left-0 h-2/3 w-px bg-gray-200">
+              <motion.div
+                style={{ y: timelineYWhy }}
+                className="absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-black rounded-full"
+              />
+            </div>
+            <div className="pl-12">
+              <h2 className="text-6xl font-light">Почему IWM?</h2>
+              <p className="mt-4 text-lg text-gray-500">Мы делаем инвестиции доступными и надежными</p>
+              <p className="mt-8 text-gray-600">
+                IWM — инвестиционный маркетплейс, предоставляющий частным инвесторам доступ к фондам и проектам, которые ранее были доступны только профессиональным участникам рынка.
+              </p>
+              <p className="mt-4 text-gray-600">
+                Разнообразие и диверсификация — широкий выбор инвестиционных инструментов для вашего портфеля.
+              </p>
+              <button className="mt-12 border border-black rounded-full px-8 py-3 hover:bg-black hover:text-white transition-colors">
+                ЗАРЕГИСТРИРОВАТЬСЯ
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column (Scrolling) */}
+          <div className="h-screen flex flex-col justify-around py-20">
+            <motion.div style={{ opacity: itemOpacity1 }} className="border-b border-gray-200 py-8">
+              <p className="text-sm text-gray-500 mb-4">{whyIWMItems[0].description}</p>
+              <div className="bg-gray-800 h-48 w-full mb-6"></div>
+              <div className="flex justify-between items-center">
+                <h3 className="text-3xl font-bold">{whyIWMItems[0].title}</h3>
+                <div className="w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer">
+                  <ChevronRight className="h-6 w-6 text-gray-400" />
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div style={{ opacity: itemOpacity2 }} className="border-b border-gray-200 py-8">
+              <p className="text-sm text-gray-500 mb-4">{whyIWMItems[1].description}</p>
+              <div className="bg-gray-800 h-48 w-full mb-6"></div>
+              <div className="flex justify-between items-center">
+                <h3 className="text-3xl font-bold">{whyIWMItems[1].title}</h3>
+                <div className="w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer">
+                  <ChevronRight className="h-6 w-6 text-gray-400" />
+                </div>
+              </div>
+            </motion.div>
+           
+            <motion.div style={{ opacity: itemOpacity3 }} className="py-8">
+              <p className="text-sm text-gray-500 mb-4">{whyIWMItems[2].description}</p>
+              <div className="bg-gray-800 h-48 w-full mb-6"></div>
+              <div className="flex justify-between items-center">
+                <h3 className="text-3xl font-bold">{whyIWMItems[2].title}</h3>
+                <div className="w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer">
+                  <ChevronRight className="h-6 w-6 text-gray-400" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="bg-white py-24">
+      <div className="container mx-auto px-6">
+        <div className="overflow-hidden">
+          <motion.div 
+            className="flex gap-8"
+            animate={{ x: `-${currentGallerySlide * (100 / 3)}%` }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          >
+            {gallerySlides.map((slide, index) => (
+              <div key={index} className="flex-shrink-0 w-1/3">
+                <div className="bg-gray-800 text-white p-8 relative h-[600px] flex flex-col justify-between">
+                  <div>
+                    <div className="w-4 h-4 rounded-full bg-white mb-8"></div>
+                    <h3 className="text-4xl font-light">{slide.category}</h3>
+                  </div>
+                  <div className="bg-white text-black p-6">
+                    <img src="/LOGO.svg" alt="Company Logo" className="h-6 mb-4" />
+                    <p className="text-sm text-gray-500">{slide.description}</p>
+                    <div className="flex justify-between items-center mt-4">
+                      <h4 className="text-xl font-bold">{slide.title}</h4>
+                      <div className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer">
+                        <ChevronRight className="h-5 w-5 text-gray-400" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+        <div className="flex justify-center items-center mt-12 gap-4">
+          <button 
+            onClick={() => setCurrentGallerySlide(prev => Math.max(prev - 1, 0))}
+            className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer"
+          >
+            <ChevronLeft className="h-5 w-5 text-gray-400" />
+          </button>
+          <div className="flex gap-2">
+            {gallerySlides.map((_, i) => (
+              <div 
+                key={i} 
+                className={`w-2.5 h-2.5 rounded-full ${currentGallerySlide === i ? 'bg-black' : 'border border-gray-400'}`}
+              ></div>
+            ))}
+          </div>
+          <button 
+            onClick={() => setCurrentGallerySlide(prev => Math.min(prev + 1, gallerySlides.length - 1))}
+            className="w-10 h-10 rounded-full border border-gray-900 bg-gray-900 flex items-center justify-center cursor-pointer"
+          >
+            <ChevronRight className="h-5 w-5 text-white" />
+          </button>
+        </div>
+      </div>
+    </section>
     </div>
   );
 }
