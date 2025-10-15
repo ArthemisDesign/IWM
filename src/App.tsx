@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Facebook, Instagram, Send } from 'lucide-react';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -216,6 +216,25 @@ const gallerySlides = [
   }
 ];
 
+const newsSlides = [
+  {
+    title: 'ЗАГОЛОВОК У ВТОРОЙ НОВОСТИ',
+    description: 'Краткое описание новости',
+  },
+  {
+    title: 'ЗАГОЛОВОК У ТРЕТЬЕЙ НОВОСТИ',
+    description: 'Краткое описание новости',
+  },
+  {
+    title: 'ЗАГОЛОВОК У ЧЕТВЕРТОЙ НОВОСТИ',
+    description: 'Краткое описание новости',
+  },
+  {
+    title: 'ЗАГОЛОВОК У ПЯТОЙ НОВОСТИ',
+    description: 'Краткое описание новости',
+  }
+];
+
 
 const StatItem = ({ stat }) => {
   const { ref, inView } = useInView({
@@ -287,6 +306,7 @@ function App() {
   const timelineY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   const [currentGallerySlide, setCurrentGallerySlide] = useState(0);
+  const [currentNewsSlide, setCurrentNewsSlide] = useState(0);
 
   const whyIWMRef = useRef(null);
   const { scrollYProgress: whyIWMScrollYProgress } = useScroll({
@@ -694,8 +714,208 @@ function App() {
             <ChevronRight className="h-5 w-5 text-white" />
           </button>
         </div>
+        <div className="text-center mt-24">
+          <h2 className="text-5xl font-light">Особые предложения</h2>
+          <p className="mt-4 text-lg text-gray-600">Эксклюзивные решения, адаптированные под ваш уровень инвестиций</p>
+        </div>
       </div>
     </section>
+
+    <section className="bg-gray-100 py-24">
+        <div className="container mx-auto px-6">
+          <div className="mb-20">
+            <h2 className="text-5xl font-light">
+              Партнеры <span className="text-red-500">IWM</span>
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">Мы работаем с лучшими</p>
+          </div>
+
+          <div className="relative h-96">
+            <div className="grid grid-cols-4 gap-8 pt-8">
+              <div className="h-64 bg-gray-800"></div>
+              <div className="h-64 bg-gray-800"></div>
+              <div className="h-64 bg-gray-800"></div>
+              <div className="h-64 bg-gray-800"></div>
+            </div>
+
+            <div className="absolute top-0 left-0 w-full grid grid-cols-4 gap-8">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="relative h-8">
+                  <div className="absolute top-0 left-0 w-px h-8 bg-white"></div>
+                  <div className="absolute -top-2 -left-2 w-4 h-4 bg-black rounded-full"></div>
+                </div>
+              ))}
+            </div>
+
+            <div className="absolute bottom-24 w-full h-px bg-gray-400"></div>
+            
+            <div className="absolute bottom-12 left-2/3">
+              <div className="relative w-4 h-4 bg-black rounded-full">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 w-px h-4 bg-gray-400"></div>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-1/2">
+              <div className="relative w-4 h-4 bg-black rounded-full">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 w-px h-4 bg-gray-400"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-24">
+        <div className="container mx-auto px-6">
+          <div className="overflow-hidden">
+            <motion.div 
+              className="flex gap-8"
+              animate={{ x: `-${currentNewsSlide * (100 / 3)}%` }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            >
+              {newsSlides.map((slide, index) => (
+                <div key={index} className="flex-shrink-0 w-1/3">
+                  <div className="bg-gray-800 relative h-[600px] flex flex-col justify-end">
+                    <div className="bg-white text-black p-6 m-8">
+                      <div className="flex justify-between items-start mb-4">
+                        <p className="text-sm text-gray-500">{slide.description}</p>
+                        <img src="/LOGO.svg" alt="Company Logo" className="h-6" />
+                      </div>
+                      <div className="flex justify-between items-end mt-4">
+                        <h4 className="text-xl font-bold w-3/4">{slide.title}</h4>
+                        <div className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer shrink-0">
+                          <ChevronRight className="h-5 w-5 text-gray-400" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+          <div className="flex justify-center items-center mt-12 gap-4">
+            <button 
+              onClick={() => setCurrentNewsSlide(prev => Math.max(prev - 1, 0))}
+              className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer"
+            >
+              <ChevronLeft className="h-5 w-5 text-gray-400" />
+            </button>
+            <div className="flex gap-2">
+              {newsSlides.map((_, i) => (
+                <div 
+                  key={i} 
+                  className={`w-2.5 h-2.5 rounded-full ${currentNewsSlide === i ? 'bg-black' : 'border border-gray-400'}`}
+                ></div>
+              ))}
+            </div>
+            <button 
+              onClick={() => setCurrentNewsSlide(prev => Math.min(prev + 1, newsSlides.length - 1))}
+              className="w-10 h-10 rounded-full border border-gray-900 bg-gray-900 flex items-center justify-center cursor-pointer"
+            >
+              <ChevronRight className="h-5 w-5 text-white" />
+            </button>
+          </div>
+          <div className="flex justify-between items-end mt-24">
+            <div>
+                <h2 className="text-5xl font-light">Новости</h2>
+                <p className="mt-4 text-lg text-gray-600">Главные рыночные события и аналитика в одном месте</p>
+            </div>
+            <button className="border border-black rounded-full px-8 py-3 hover:bg-black hover:text-white transition-colors">
+                СМОТРЕТЬ ВСЕ НОВОСТИ
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-100 py-24">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16">
+            <div>
+              <h2 className="text-5xl font-light leading-tight">
+                Будьте в курсе лучших<br/>
+                инвест-идей
+              </h2>
+              <p className="mt-8 text-gray-600">
+                Ежедневная аналитика и инсайты, которые помогут принимать взвешенные инвестиционные решения
+              </p>
+              <p className="mt-4 text-gray-600">
+                Получайте отборные рыночные обзоры, перспективные идеи и стратегические прогнозы от экспертов IWM. Только проверенные данные, без шума и лишней информации. Подпишитесь и инвестируйте с уверенностью в каждом шаге.
+              </p>
+              
+              <div className="mt-12">
+                <p className="text-4xl font-light">
+                  <span className="font-semibold">9 000+</span> подписчиков с нами
+                </p>
+                <p className="mt-2 text-gray-600">Мы делимся только тем, что сами используем</p>
+              </div>
+
+              <div className="mt-12">
+                <p className="text-sm font-semibold text-gray-500 tracking-wider">ПРЕИМУЩЕСТВА ПОДПИСКИ</p>
+                <div className="flex flex-wrap gap-3 mt-4">
+                  <span className="bg-red-500 text-white px-4 py-2 rounded-full text-sm">Актуальные тренды рынков</span>
+                  <span className="bg-red-500 text-white px-4 py-2 rounded-full text-sm">Рабочие идеи для роста капитала</span>
+                  <span className="bg-red-500 text-white px-4 py-2 rounded-full text-sm">Обзоры ключевых событий и сделок</span>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="absolute h-full w-px bg-gray-300 left-1/2 -ml-px"></div>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-black rounded-full"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-4 h-4 bg-black rounded-full"></div>
+              <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-4 h-4 bg-black rounded-full"></div>
+            </div>
+          </div>
+          
+          <div className="mt-24 border-t border-gray-300 pt-12">
+            <div className="flex items-center gap-4">
+              <input 
+                type="email" 
+                placeholder="Ваш email" 
+                className="flex-grow bg-white border border-gray-300 rounded-full px-6 py-3"
+              />
+              <button className="bg-gray-800 text-white px-8 py-3 rounded-full relative">
+                Подписаться
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  +1
+                </span>
+              </button>
+            </div>
+            <p className="mt-4 text-xs text-gray-500">
+              Нажимая кнопку вы соглашаетесь с условиями <a href="#" className="underline">политики конфиденциальности</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-white py-12">
+        <div className="container mx-auto px-6">
+          <div className="flex justify-between items-start">
+            <div>
+              <div className="flex space-x-8 text-gray-800">
+                <a href="#" className="hover:text-red-500">Для инвесторов</a>
+                <a href="#" className="hover:text-red-500">Для бизнеса</a>
+                <a href="#" className="hover:text-red-500">О компании</a>
+              </div>
+              <div className="flex space-x-6 mt-6 text-sm text-red-400">
+                <span>© 2025 IWM</span>
+                <a href="#" className="hover:underline">Политика конфиденциальности</a>
+                <a href="#" className="hover:underline">Юридическая информация</a>
+                <a href="#" className="hover:underline">Уведомление о рисках</a>
+              </div>
+            </div>
+            <div className="flex space-x-4">
+              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white">
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white">
+                <Send className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
     </div>
   );
 }
