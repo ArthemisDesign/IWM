@@ -178,15 +178,15 @@ const howItWorksSteps = [
   },
   {
     step: '02',
-    title: 'ВЫБОР ПРОЕКТА',
-    subtitle: 'Выберите проект, который соответствует вашим целям',
-    bgColor: 'bg-yellow-400',
+    title: 'ВЫБОР СТРАТЕГИИ',
+    subtitle: 'Выберите продукт или стратегию под свои цели',
+    bgColor: 'bg-gray-800',
   },
   {
     step: '03',
     title: 'ИНВЕСТИЦИЯ',
-    subtitle: 'Высокая доходность и прозрачность на каждом этапе',
-    bgColor: 'bg-blue-500',
+    subtitle: 'Вложите средства и наблюдайте за ростом капитала',
+    bgColor: 'bg-gray-800',
   }
 ];
 
@@ -321,6 +321,9 @@ function App() {
     target: howItWorksRef,
     offset: ['start start', 'end end']
   });
+
+  const redOverlayY = useTransform(howItWorksScrollYProgress, [0.3, 0.35], ['100%', '0%']);
+  const blueOverlayY = useTransform(howItWorksScrollYProgress, [0.63, 0.68], ['100%', '0%']);
 
   useEffect(() => {
     const unsubscribe = howItWorksScrollYProgress.on("change", (latest) => {
@@ -555,6 +558,8 @@ function App() {
 
       <section ref={howItWorksRef} className="bg-[#EFEFEF] h-[300vh] relative">
         <div className="sticky top-0 h-screen overflow-hidden">
+          <motion.div style={{ y: redOverlayY }} className="absolute inset-0 bg-custom-red" />
+          <motion.div style={{ y: blueOverlayY }} className="absolute inset-0 bg-custom-blue" />
           <div className="container mx-auto px-6 h-full relative flex flex-col items-center">
             
             {/* Logo */}
@@ -577,8 +582,8 @@ function App() {
                     <motion.div
                       key={index}
                       className={`w-full h-full absolute top-0 left-0 ${step.bgColor}`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: isActive ? 1 : 0 }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.8 }}
                       transition={{ duration: 0.5 }}
                     />
                   );
