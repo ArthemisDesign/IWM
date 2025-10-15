@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Facebook, Instagram, Send } from 'lucide-react';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 const slides = [
   {
@@ -322,17 +322,14 @@ function App() {
     offset: ['start start', 'end end']
   });
 
-  const redOverlayY = useTransform(howItWorksScrollYProgress, [0.3, 0.35], ['100%', '0%']);
-  const blueOverlayY = useTransform(howItWorksScrollYProgress, [0.63, 0.68], ['100%', '0%']);
+  const smoothHowItWorksScrollYProgress = useSpring(howItWorksScrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-  useEffect(() => {
-    const unsubscribe = howItWorksScrollYProgress.on("change", (latest) => {
-      const step = Math.min(Math.floor(latest * howItWorksSteps.length), howItWorksSteps.length - 1);
-      setActiveStep(step);
-    });
-    return () => unsubscribe();
-  }, [howItWorksScrollYProgress]);
-
+  const redOverlayY = useTransform(smoothHowItWorksScrollYProgress, [0.3, 0.35], ['100%', '0%']);
+  const blueOverlayY = useTransform(smoothHowItWorksScrollYProgress, [0.63, 0.68], ['100%', '0%']);
 
   return (
     <div className="min-h-screen bg-white text-gray-800 p-4">
@@ -577,14 +574,16 @@ function App() {
               {/* Square in the center */}
               <div className="w-[500px] h-[500px] relative">
                 {howItWorksSteps.map((step, index) => {
-                  const isActive = index === activeStep;
+                  const start = index / howItWorksSteps.length;
+                  const end = (index + 1) / howItWorksSteps.length;
+                  const opacity = useTransform(smoothHowItWorksScrollYProgress, [start, start + 0.1, end - 0.1, end], [0, 1, 1, 0]);
+                  const scale = useTransform(smoothHowItWorksScrollYProgress, [start, start + 0.1, end - 0.1, end], [0.8, 1, 1, 0.8]);
+
                   return (
                     <motion.div
                       key={index}
                       className={`w-full h-full absolute top-0 left-0 ${step.bgColor}`}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.8 }}
-                      transition={{ duration: 0.5 }}
+                      style={{ opacity, scale }}
                     />
                   );
                 })}
@@ -593,13 +592,14 @@ function App() {
                 <div className="absolute top-1/2 -translate-y-1/2 right-full mr-16 w-80">
                   <div className="relative h-24">
                     {howItWorksSteps.map((step, index) => {
-                      const isActive = index === activeStep;
+                      const start = index / howItWorksSteps.length;
+                      const end = (index + 1) / howItWorksSteps.length;
+                      const opacity = useTransform(smoothHowItWorksScrollYProgress, [start, start + 0.1, end - 0.1, end], [0, 1, 1, 0]);
+                      
                       return (
                         <motion.div
                           key={index}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: isActive ? 1 : 0 }}
-                          transition={{ duration: 0.5 }}
+                          style={{ opacity }}
                           className="absolute top-0 left-0 w-full"
                         >
                           <div className="flex items-start">
