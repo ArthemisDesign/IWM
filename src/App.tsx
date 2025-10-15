@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Facebook, Instagram, Send } from 'lucide-react';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
@@ -171,10 +171,22 @@ const upcomingProjects = [
 
 const howItWorksSteps = [
   {
+    step: '01',
+    title: 'РЕГИСТРАЦИЯ',
+    subtitle: 'Создайте учетную запись за пару минут',
+    bgColor: 'bg-gray-800',
+  },
+  {
+    step: '02',
+    title: 'ВЫБОР ПРОЕКТА',
+    subtitle: 'Выберите проект, который соответствует вашим целям',
+    bgColor: 'bg-yellow-400',
+  },
+  {
     step: '03',
     title: 'ИНВЕСТИЦИЯ',
-    subtitle: '',
-    image: '/how-it-works-3.jpg',
+    subtitle: 'Высокая доходность и прозрачность на каждом этапе',
+    bgColor: 'bg-blue-500',
   }
 ];
 
@@ -259,29 +271,25 @@ const StatItem = ({ stat }) => {
   );
 };
 
-const UpcomingProjectCard = ({ project }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
+const UpcomingProjectCard = ({ project, hasBorderRight, isSpecial }) => {
   return (
-    <div 
-      className="flex border border-gray-300 group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <img src={project.image} alt={project.title} className="w-1/3 object-cover"/>
-      <div 
-        className={`w-2/3 p-6 relative transition-colors duration-300 ${isHovered ? 'bg-[#FD6D5B] text-white' : `${project.bgColor} ${project.textColor}`}`}
-      >
-        <div className={`absolute top-4 right-4 border rounded-full px-3 py-1 text-sm transition-colors duration-300 ${isHovered ? 'border-white' : 'border-black'}`}>{project.year}</div>
-        <div className={`absolute top-16 right-4 w-8 h-8 rounded-full border flex items-center justify-center transition-colors duration-300 ${isHovered ? 'border-white' : 'border-black'}`}>
-          <ChevronRight className="h-5 w-5" />
+    <div className={`p-8 flex gap-8 items-start border-b border-gray-300 ${hasBorderRight ? 'border-r border-gray-300' : ''}`}>
+      <div className="w-40 h-40 bg-gray-800 flex-shrink-0"></div>
+      <div className="flex-grow">
+        <div className="flex justify-between items-start">
+          <div>
+            <div className="border border-gray-400 rounded-full px-3 py-1 text-sm inline-block mb-4">{project.year}</div>
+            <h3 className="font-bold text-xl mt-2">{project.title}</h3>
+          </div>
+          <button className={`w-10 h-10 rounded-full flex items-center justify-center cursor-pointer shrink-0 ${isSpecial ? 'bg-black text-white' : 'border border-gray-400 text-gray-400'}`}>
+            <ChevronRight className="h-5 w-5" />
+          </button>
         </div>
-        <h3 className="font-bold text-xl mt-12">{project.title}</h3>
-        <p className="mt-4 text-sm">{project.description}</p>
+        <p className="mt-4 text-sm text-gray-600">{project.description}</p>
       </div>
     </div>
   );
-}
+};
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -308,16 +316,19 @@ function App() {
   const [currentGallerySlide, setCurrentGallerySlide] = useState(0);
   const [currentNewsSlide, setCurrentNewsSlide] = useState(0);
 
-  const whyIWMRef = useRef(null);
-  const { scrollYProgress: whyIWMScrollYProgress } = useScroll({
-    target: whyIWMRef,
-    offset: ['start start', 'end end'],
+  const howItWorksRef = useRef(null);
+  const { scrollYProgress: howItWorksScrollYProgress } = useScroll({
+    target: howItWorksRef,
+    offset: ['start start', 'end end']
   });
 
-  const timelineYWhy = useTransform(whyIWMScrollYProgress, [0, 1], ['5%', '80%']);
-  const itemOpacity1 = useTransform(whyIWMScrollYProgress, [0, 0.33], [1, 0.3]);
-  const itemOpacity2 = useTransform(whyIWMScrollYProgress, [0.33, 0.66], [1, 0.3]);
-  const itemOpacity3 = useTransform(whyIWMScrollYProgress, [0.66, 1], [1, 0.3]);
+  useEffect(() => {
+    const unsubscribe = howItWorksScrollYProgress.on("change", (latest) => {
+      const step = Math.min(Math.floor(latest * howItWorksSteps.length), howItWorksSteps.length - 1);
+      setActiveStep(step);
+    });
+    return () => unsubscribe();
+  }, [howItWorksScrollYProgress]);
 
 
   return (
@@ -528,139 +539,128 @@ function App() {
           <p className="mt-4 text-lg text-gray-600">Проекты, потенциал которых вы можете использовать прямо сейчас</p>
         </div>
         
-        <div className="relative">
-          <div className="absolute left-1/2 top-0 h-full w-px bg-gray-300 -ml-px">
-             <div className="sticky top-1/2 -ml-2 flex flex-col items-center gap-y-[280px]">
-                <div className="w-4 h-4 bg-black rounded-full"></div>
-                <div className="w-4 h-4 bg-black rounded-full"></div>
-                <div className="w-4 h-4 bg-black rounded-full"></div>
-            </div>
-                </div>
+        <div className="border-t border-gray-300">
           <div className="grid grid-cols-2">
             {upcomingProjects.map((project, index) => (
-              <div key={index} className={index % 2 === 0 ? 'pr-8' : 'pl-8'}>
-                <UpcomingProjectCard project={project} />
-              </div>
+              <UpcomingProjectCard 
+                key={index} 
+                project={project} 
+                hasBorderRight={index % 2 === 0}
+                isSpecial={index === 0}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#EFEFEF] py-20">
-        <div className="container mx-auto px-6">
-          <div className="flex justify-between items-start mb-20">
-            <div className="w-full">
-              <h2 className="text-5xl font-light text-center">Как это работает?</h2>
-              <p className="text-lg text-gray-500 mt-2 text-center">Всего 3 простых шага</p>
-            </div>
-            <img src="/LOGO.svg" alt="Company Logo" className="h-8 flex-shrink-0" />
-          </div>
+      <section ref={howItWorksRef} className="bg-[#EFEFEF] h-[300vh] relative">
+        <div className="sticky top-0 h-screen overflow-hidden">
+          <div className="container mx-auto px-6 h-full relative flex flex-col items-center">
+            
+            {/* Logo */}
+            <img src="/LOGO.svg" alt="Company Logo" className="h-8 absolute top-20 right-6" />
 
-          <div className="grid md:grid-cols-2 gap-24 items-center">
-            {/* Left Column: Steps */}
-            <div className="space-y-12">
-              {howItWorksSteps.map((step, index) => {
-                const isActive = index === 0;
-                return (
-                  <div key={index}>
-                    <div className="flex items-start">
-                      <span className={`text-xl mr-6 font-light ${isActive ? 'text-black' : 'text-gray-400'}`}>{step.step}</span>
-                      <div>
-                        <h3 className={`text-2xl font-bold ${isActive ? 'text-black' : 'text-gray-400'}`}>{step.title}</h3>
-                        {step.subtitle && <p className={`mt-2 text-base ${isActive ? 'text-gray-800' : 'text-gray-500'}`}>{step.subtitle}</p>}
-                      </div>
-                    </div>
-                    <div className="pl-12 mt-4 h-3">
-                      {isActive && (
-                        <div className="w-full h-px bg-black relative">
-                          <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-black"></div>
-                        </div>
-                      )}
-                    </div>
+            {/* Title */}
+            <div className="text-center pt-20">
+              <h2 className="text-5xl font-light">Как это работает?</h2>
+              <p className="text-lg text-gray-500 mt-2">Всего 3 простых шага</p>
+            </div>
+
+            {/* Main Content Area */}
+            <div className="flex-grow w-full flex items-center justify-center relative">
+              
+              {/* Square in the center */}
+              <div className="w-[500px] h-[500px] relative">
+                {howItWorksSteps.map((step, index) => {
+                  const isActive = index === activeStep;
+                  return (
+                    <motion.div
+                      key={index}
+                      className={`w-full h-full absolute top-0 left-0 ${step.bgColor}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: isActive ? 1 : 0 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  );
+                })}
+
+                {/* Text on the left of the square */}
+                <div className="absolute top-1/2 -translate-y-1/2 right-full mr-16 w-80">
+                  <div className="relative h-24">
+                    {howItWorksSteps.map((step, index) => {
+                      const isActive = index === activeStep;
+                      return (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: isActive ? 1 : 0 }}
+                          transition={{ duration: 0.5 }}
+                          className="absolute top-0 left-0 w-full"
+                        >
+                          <div className="flex items-start">
+                            <span className="text-xl mr-6 font-light">{step.step}</span>
+                            <div className="text-left">
+                              <h3 className="text-2xl font-bold">{step.title}</h3>
+                              {step.subtitle && <p className="mt-2 text-sm text-gray-600">{step.subtitle}</p>}
+                            </div>
+                          </div>
+                        </motion.div>
+                      );
+                    })}
                   </div>
-                )
-              })}
+                </div>
+              </div>
             </div>
+            
+            {/* Button */}
+            <button className="absolute bottom-20 right-6 border border-black rounded-full px-8 py-3 hover:bg-black hover:text-white transition-colors">
+              ЗАРЕГИСТРИРОВАТЬСЯ
+            </button>
 
-            {/* Right Column: Image and Button */}
-            <div className="relative">
-              <div className="bg-gray-800 h-[600px] w-full">
-                <img src={howItWorksSteps[0].image} alt={howItWorksSteps[0].title} className="w-full h-full object-cover" />
-              </div>
-              <div className="flex justify-end mt-8">
-                <button className="border border-black rounded-full px-8 py-3 hover:bg-black hover:text-white transition-colors">
-                  ЗАРЕГИСТРИРОВАТЬСЯ
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      <section ref={whyIWMRef} className="bg-white py-24 relative h-[250vh]">
-      <div className="sticky top-0 h-screen flex items-center">
-        <div className="container mx-auto px-6 grid grid-cols-2 gap-24">
-          {/* Left Column (Sticky) */}
-          <div className="flex flex-col justify-center h-full relative">
-            <div className="absolute top-1/2 -translate-y-1/2 left-0 h-2/3 w-px bg-gray-200">
-              <motion.div
-                style={{ y: timelineYWhy }}
-                className="absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-black rounded-full"
-              />
-            </div>
-            <div className="pl-12">
-              <h2 className="text-6xl font-light">Почему IWM?</h2>
-              <p className="mt-4 text-lg text-gray-500">Мы делаем инвестиции доступными и надежными</p>
-              <p className="mt-8 text-gray-600">
-                IWM — инвестиционный маркетплейс, предоставляющий частным инвесторам доступ к фондам и проектам, которые ранее были доступны только профессиональным участникам рынка.
-              </p>
-              <p className="mt-4 text-gray-600">
-                Разнообразие и диверсификация — широкий выбор инвестиционных инструментов для вашего портфеля.
-              </p>
-              <button className="mt-12 border border-black rounded-full px-8 py-3 hover:bg-black hover:text-white transition-colors">
-                ЗАРЕГИСТРИРОВАТЬСЯ
-              </button>
-            </div>
-          </div>
+      <section className="bg-white py-24">
+        <div className="container mx-auto px-6">
+            <div className="grid md:grid-cols-2 gap-24 items-center">
+                {/* Left Column */}
+                <div className="relative pl-12">
+                    <div className="absolute top-0 left-0 h-full">
+                        <div className="w-px h-full bg-gray-200"></div>
+                        <div className="absolute top-2 -left-1.5 w-4 h-4 bg-black rounded-full"></div>
+                    </div>
+                    <h2 className="text-5xl font-light">Почему IWM?</h2>
+                    <p className="mt-4 text-lg text-gray-500">Мы делаем инвестиции доступными и надежными</p>
+                    <p className="mt-8 text-gray-600">
+                        IWM — инвестиционный маркетплейс, предоставляющий частным инвесторам доступ к фондам и проектам, которые ранее были доступны только профессиональным участникам рынка.
+                    </p>
+                    <p className="mt-4 text-gray-600">
+                        Разнообразие и диверсификация — широкий выбор инвестиционных инструментов для вашего портфеля.
+                    </p>
+                    <button className="mt-12 border border-black rounded-full px-8 py-3 hover:bg-black hover:text-white transition-colors">
+                        ЗАРЕГИСТРИРОВАТЬСЯ
+                    </button>
+                </div>
 
-          {/* Right Column (Scrolling) */}
-          <div className="h-screen flex flex-col justify-around py-20">
-            <motion.div style={{ opacity: itemOpacity1 }} className="border-b border-gray-200 py-8">
-              <p className="text-sm text-gray-500 mb-4">{whyIWMItems[0].description}</p>
-              <div className="bg-gray-800 h-48 w-full mb-6"></div>
-              <div className="flex justify-between items-center">
-                <h3 className="text-3xl font-bold">{whyIWMItems[0].title}</h3>
-                <div className="w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer">
-                  <ChevronRight className="h-6 w-6 text-gray-400" />
+                {/* Right Column */}
+                <div className="space-y-12">
+                    {whyIWMItems.map((item, index) => (
+                        <div key={index} className={index < whyIWMItems.length - 1 ? "border-b border-gray-200 pb-8" : "pb-8"}>
+                            <p className="text-sm text-gray-500 mb-4">{item.description}</p>
+                            <div className={`h-48 w-full mb-6 ${index === 2 ? 'bg-gray-600' : 'bg-gray-300'}`}></div>
+                            <div className="flex justify-between items-center">
+                                <h3 className="text-3xl font-light tracking-wider">{item.title}</h3>
+                                <div className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center cursor-pointer">
+                                    <ChevronRight className="h-6 w-6 text-gray-400" />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-              </div>
-            </motion.div>
-            
-            <motion.div style={{ opacity: itemOpacity2 }} className="border-b border-gray-200 py-8">
-              <p className="text-sm text-gray-500 mb-4">{whyIWMItems[1].description}</p>
-              <div className="bg-gray-800 h-48 w-full mb-6"></div>
-              <div className="flex justify-between items-center">
-                <h3 className="text-3xl font-bold">{whyIWMItems[1].title}</h3>
-                <div className="w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer">
-                  <ChevronRight className="h-6 w-6 text-gray-400" />
-                </div>
-              </div>
-            </motion.div>
-           
-            <motion.div style={{ opacity: itemOpacity3 }} className="py-8">
-              <p className="text-sm text-gray-500 mb-4">{whyIWMItems[2].description}</p>
-              <div className="bg-gray-800 h-48 w-full mb-6"></div>
-              <div className="flex justify-between items-center">
-                <h3 className="text-3xl font-bold">{whyIWMItems[2].title}</h3>
-                <div className="w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center cursor-pointer">
-                  <ChevronRight className="h-6 w-6 text-gray-400" />
-                </div>
-              </div>
-            </motion.div>
-          </div>
+            </div>
         </div>
-      </div>
-    </section>
+      </section>
 
     <section className="bg-white py-24">
       <div className="container mx-auto px-6">
