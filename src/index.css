@@ -51,6 +51,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'N27';
+  src: url('./assets/fonts/n27-regular-webfont.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   font-family: 'BwModelicaCyrillicDEMO', sans-serif;
 }
