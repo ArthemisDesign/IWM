@@ -6,6 +6,14 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        'custom-red': '#FD6D5B',
+        'custom-blue': '#3DC5DA',
+        'custom-grey': '#DFE3E2',
+        'pale-red': '#FDE4E1',
+        'pale-blue': '#D5F2F7',
+        'pale-grey': '#F2F4F3',
+      },
       fontFamily: {
         sans: ['BwModelicaCyrillicDEMO', 'sans-serif'],
       },

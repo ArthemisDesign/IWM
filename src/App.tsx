@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Facebook, Instagram, Send } from 'lucide-react';
 
+const hoverColors = ['hover:bg-pale-red', 'hover:bg-pale-blue', 'hover:bg-pale-grey'];
+
 // Header component
 const Header = () => (
   <header className="bg-white sticky top-0 z-50">
@@ -14,8 +16,8 @@ const Header = () => (
         <a href="#about" className="text-gray-500 hover:text-black">О компании</a>
       </div>
       <div className="flex items-center space-x-6 text-sm">
-        <span className="cursor-pointer font-medium">Ru</span>
-        <a href="#login" className="font-medium bg-black text-white px-5 py-2 hover:bg-gray-800">Личный кабинет</a>
+        <span className="cursor-pointer font-semibold">Ru</span>
+        <a href="#login" className="font-semibold bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 uppercase">Личный кабинет</a>
       </div>
     </nav>
   </header>
@@ -27,56 +29,72 @@ const Slider = () => {
     {
       title: "Инвестируйте в те проекты и стратегии, которые подходят персонально для вас",
       subtitle: "Выбирайте из широкого спектра вариантов, которые соответствуют вашим интересам, ценностям, финансовым целям и уровню риска, который для вас комфортен",
-      buttonText: "Начать"
+      buttonText: "Начать",
+      bgColor: "bg-pale-red"
     },
     {
       title: "Платформа РУ",
       subtitle: "Алгоритмическая стратегия, ранее доступная только квалифицированным инвесторам, теперь открыта на IWM",
-      buttonText: "Узнать больше"
+      buttonText: "Узнать больше",
+      bgColor: "bg-pale-blue"
     },
     {
       title: "Станьте частью самых амбициозных проектов мира",
       subtitle: "Финансовая экосистема IWM открывает уникальные возможности для инвесторов и финансовых институтов по всему миру",
-      buttonText: "Подробнее"
+      buttonText: "Подробнее",
+      bgColor: "bg-pale-grey"
     },
     {
       title: "Надежность и прозрачность",
       subtitle: "Все данные по проектам доступны вам не раз в квартал, а в любой момент. В личном кабинете отражается актуальная статистика в реальном времени, а сводные показатели фонда и проектов всегда на виду.",
-      buttonText: "Подробнее"
+      buttonText: "Подробнее",
+      bgColor: "bg-gray-100"
     }
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const changeSlide = (newIndex: number) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentSlide(newIndex);
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 50);
+    }, 300);
+  };
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    changeSlide(currentSlide === slides.length - 1 ? 0 : currentSlide + 1);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    changeSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
   };
 
   return (
-    <section className="bg-white">
-      <div className="container mx-auto px-6 py-32 flex flex-col justify-center min-h-[calc(100vh-88px)]">
-        <div className="text-left max-w-4xl">
-          <div className="min-h-[24rem]">
+    <section className={`m-6 transition-colors duration-500 ease-in-out rounded-3xl ${slides[currentSlide].bgColor}`}>
+      <div className="container mx-auto px-6 py-32 flex flex-col justify-center min-h-[calc(100vh-88px-3rem)]">
+        <div className="text-left max-w-5xl">
+          <div className={`transition-opacity duration-300 h-[28rem] ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
             <h1 className="text-6xl md:text-7xl font-medium mb-8 leading-tight">
               {slides[currentSlide].title}
             </h1>
-            <p className="text-lg text-gray-600 mb-12 max-w-2xl">
+            <p className="text-lg text-gray-600 mb-12 max-w-3xl">
               {slides[currentSlide].subtitle}
             </p>
           </div>
           <div className="flex items-center space-x-6">
-            <button className="bg-red-500 text-white px-10 py-4 font-semibold hover:bg-red-600 transition-colors">
+            <button className="bg-custom-red text-white w-72 text-center px-10 py-4 rounded-full font-semibold transition hover:brightness-95 uppercase tracking-wider">
               {slides[currentSlide].buttonText}
             </button>
             <div className="flex items-center space-x-3">
-                <button onClick={prevSlide} className="w-12 h-12 border-2 border-gray-200 flex items-center justify-center hover:bg-gray-100">
+                <button onClick={prevSlide} className="w-12 h-12 rounded-full border-2 border-gray-700 text-gray-700 flex items-center justify-center hover:bg-black/10">
                     <ChevronLeft className="h-6 w-6" />
                 </button>
-                <button onClick={nextSlide} className="w-12 h-12 border-2 border-gray-200 flex items-center justify-center hover:bg-gray-100">
+                <button onClick={nextSlide} className="w-12 h-12 rounded-full border-2 border-gray-700 text-gray-700 flex items-center justify-center hover:bg-black/10">
                     <ChevronRight className="h-6 w-6" />
                 </button>
             </div>
@@ -128,8 +146,8 @@ const Invest = () => {
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <div key={index}>
-                <div className="w-full h-auto aspect-square bg-gray-100 mb-6"></div>
+            <div key={index} className={`p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
+                <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg"></div>
                 <h3 className="text-2xl font-medium mb-4">{project.name}</h3>
               <div className="grid grid-cols-2 gap-x-8 gap-y-4 text-md text-gray-600">
                 <div>
@@ -149,8 +167,8 @@ const Invest = () => {
             </div>
           ))}
         </div>
-        <div className="text-left mt-16">
-          <button className="border-2 border-gray-200 px-8 py-3 font-semibold hover:bg-gray-100 transition-colors">
+        <div className="text-left mt-20">
+          <button className="bg-black text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors uppercase tracking-wider">
             Смотреть все проекты
           </button>
         </div>
@@ -179,8 +197,8 @@ const UpcomingProjects = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
           {projects.map((project, index) => (
-            <div key={index}>
-              <div className="w-full h-auto aspect-square bg-gray-100 mb-6"></div>
+            <div key={index} className={`p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
+              <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg"></div>
               <h3 className="font-semibold text-2xl mb-3">{project.title}</h3>
               <p className="text-md text-gray-600 mb-6">{project.description}</p>
               <button className="font-semibold text-black hover:underline uppercase tracking-wider">Подробнее</button>
@@ -205,8 +223,8 @@ const HowItWorks = () => {
             <h2 className="text-6xl font-medium mb-20">Всего три простых шага</h2>
             <div className="grid md:grid-cols-3 gap-12">
                 {steps.map((step, index) => (
-                    <div key={index} className="pt-8">
-                        <div className="w-full h-auto aspect-square bg-gray-100 mb-8"></div>
+                    <div key={index} className={`p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
+                        <div className="w-full h-auto aspect-square bg-gray-100 mb-8 rounded-lg"></div>
                         <div className="text-red-500 font-semibold text-xl mb-6">0{index + 1}</div>
                         <h3 className="text-3xl font-medium mb-3">{step.title}</h3>
                         <p className="text-gray-600 text-lg">{step.description}</p>
@@ -221,36 +239,52 @@ const HowItWorks = () => {
 // Why IWM component
 const WhyIWM = () => {
     const items = [
-        {title: 'Низкий порог входа', description: 'инвестировать можно от $100 и без лишней бюрократии'},
-        {title: 'Прозрачность и доверие', description: 'все продукты проходят независимую проверку и аудит'},
-        {title: 'Образование и поддержка', description: 'обучение, вебинары и аналитика для вашего роста как инвестора'},
+        {
+            title: "Низкий порог входа",
+            description: "инвестировать можно от $100 и без лишней бюрократии"
+        },
+        {
+            title: "Прозрачность и доверие",
+            description: "все продукты проходят независимую проверку и аудит"
+        },
+        {
+            title: "Образование и поддержка",
+            description: "обучение, вебинары и аналитика для вашего роста как инвестора"
+        }
     ];
-  return (
-    <section className="bg-white py-32">
-        <div className="container mx-auto px-6 grid md:grid-cols-2 gap-24 items-center">
-            <div>
-                <h2 className="text-5xl font-medium leading-tight">Почему IWM?</h2>
-                <p className="text-xl text-gray-600 mt-6">Мы делаем инвестиции доступными и надежными</p>
-                <p className="mt-10 text-gray-700">
-                    IWM — инвестиционный маркетплейс, предоставляющий частным инвесторам доступ к фондам и проектам, которые ранее были доступны только профессиональным участникам рынка.
-                    <br/><br/>
-                    Разнообразие и диверсификация – широкий выбор инвестиционных инструментов для вашего портфеля.
-                </p>
-                <button className="mt-12 bg-black text-white px-8 py-4 font-semibold hover:bg-gray-800 transition-colors">
-                    Зарегистрироваться
-                </button>
-            </div>
-            <div className="space-y-10">
-                {items.map((item, index) => (
-                    <div key={index} className="pb-8">
-                        <h3 className="text-2xl font-medium">{item.title}</h3>
-                        <p className="text-gray-600 mt-3">{item.description}</p>
+
+    return (
+        <section className="bg-white py-20">
+            <div className="container mx-auto px-6">
+                <div className="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h2 className="text-6xl font-medium mb-6">Почему IWM?</h2>
+                        <p className="text-xl text-gray-600 mb-8">Мы делаем инвестиции доступными и надежными</p>
+                        <p className="text-lg text-gray-700 mb-6">
+                            IWM – инвестиционный маркетплейс, предоставляющий частным инвесторам доступ к фондам и проектам, которые ранее были доступны только профессиональным участникам рынка.
+                        </p>
+                        <p className="text-lg text-gray-700">
+                            Разнообразие и диверсификация – широкий выбор инвестиционных инструментов для вашего портфеля.
+                        </p>
+                        <button className="mt-12 bg-black text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors uppercase tracking-wider">
+                            Зарегистрироваться
+                        </button>
                     </div>
-                ))}
+                    <div className="space-y-12">
+                        {items.map((item, index) => (
+                            <div key={index} className="flex items-start space-x-6">
+                                <div className="w-24 h-24 bg-gray-100 rounded-lg flex-shrink-0"></div>
+                                <div>
+                                    <h3 className="text-2xl font-medium mb-2">{item.title}</h3>
+                                    <p className="text-lg text-gray-600">{item.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-  );
+        </section>
+    );
 };
 
 // Capital Tiers component
@@ -270,8 +304,8 @@ const CapitalTiers = () => {
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {tiers.map((tier, index) => (
-            <div key={index}>
-              <div className="w-full h-auto aspect-square bg-gray-100 mb-8"></div>
+            <div key={index} className={`p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
+              <div className="w-full h-auto aspect-square bg-gray-100 mb-8 rounded-lg"></div>
               <h3 className="text-3xl font-medium mb-4">{tier.title}</h3>
               <p className="text-gray-600 text-lg mb-6">{tier.description}</p>
               <a href="#" className="font-semibold text-black hover:underline uppercase tracking-wider">Узнать больше</a>
@@ -295,8 +329,8 @@ const Partners = () => {
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {partners.map((partner, index) => (
-                        <div key={index}>
-                            <div className="w-full h-auto aspect-square bg-gray-100 mb-6"></div>
+                        <div key={index} className={`p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
+                            <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg"></div>
                             <h3 className="text-xl font-medium">{partner}</h3>
                         </div>
                     ))}
@@ -315,21 +349,21 @@ const News = () => {
     ];
 
     return (
-        <section className="bg-gray-50 py-32">
+        <section className="bg-white py-32">
             <div className="container mx-auto px-6">
                 <div className="flex justify-between items-end mb-16">
                     <div>
                         <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Новости</p>
                         <h2 className="text-6xl font-medium">Главные рыночные<br/>события и аналитика</h2>
                     </div>
-                    <button className="bg-white border-2 border-gray-200 px-8 py-3 font-semibold hover:bg-gray-200 transition-colors whitespace-nowrap uppercase tracking-wider">
+                    <button className="bg-white border-2 border-gray-200 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap uppercase tracking-wider">
                         Смотреть все новости
                     </button>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8">
                     {articles.map((article, index) => (
-                        <div key={index}>
-                            <div className="w-full h-auto aspect-square bg-gray-200 mb-6"></div>
+                        <div key={index} className="p-8 rounded-lg">
+                            <div className="w-full h-auto aspect-square bg-gray-200 mb-6 rounded-lg"></div>
                             <h3 className="text-2xl font-medium leading-tight">{article.title}</h3>
                             <a href="#" className="text-black hover:underline mt-4 inline-block font-semibold uppercase tracking-wider">Узнать больше</a>
                         </div>
@@ -360,9 +394,9 @@ const Subscription = () => {
                     <span className="bg-gray-100 text-gray-800 px-4 py-2 text-sm font-medium">Обзоры ключевых событий и сделок</span>
                 </div>
             </div>
-            <div className="mt-12">
-                <input type="email" placeholder="Ваш email" className="border-2 border-gray-200 px-6 py-4 w-full text-lg"/>
-                <button className="mt-4 bg-black text-white px-8 py-4 font-semibold hover:bg-gray-800 transition-colors w-full text-lg">Подписаться</button>
+            <div className="mt-12 max-w-xl mx-auto">
+                <input type="email" placeholder="Ваш email" className="border-2 border-gray-200 px-6 py-4 w-full text-lg rounded-full"/>
+                <button className="mt-4 bg-black text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors w-full text-lg uppercase tracking-wider">Подписаться</button>
             </div>
         </div>
       </div>
@@ -371,33 +405,35 @@ const Subscription = () => {
 };
 
 // Footer component
-const Footer = () => (
-  <footer className="bg-custom-red text-white py-20">
-    <div className="container mx-auto px-6">
-      <div className="flex justify-between items-start">
-        <div className="flex space-x-10 text-gray-400">
-            <a href="#" className="hover:text-white">Правовая информация</a>
-            <a href="#" className="hover:text-white">Карта сайта</a>
-            <a href="#" className="hover:text-white">Уведомление о рисках</a>
-        </div>
-        <div className="flex space-x-4">
-          <a href="#" className="w-12 h-12 bg-gray-800 flex items-center justify-center hover:bg-red-500">
-            <Facebook className="h-6 w-6" />
-          </a>
-          <a href="#" className="w-12 h-12 bg-gray-800 flex items-center justify-center hover:bg-red-500">
-            <Instagram className="h-6 w-6" />
-          </a>
-          <a href="#" className="w-12 h-12 bg-gray-800 flex items-center justify-center hover:bg-red-500">
-            <Send className="h-6 w-6" />
-          </a>
-        </div>
-      </div>
-      <div className="mt-20 pt-10 text-sm text-gray-500">
-        <p>© 2025 IWM</p>
-      </div>
-    </div>
-  </footer>
-);
+const Footer = () => {
+    return (
+        <footer className="bg-custom-red text-white py-10">
+            <div className="container mx-auto px-6">
+                <div className="flex justify-between items-center">
+                    <div className="flex space-x-8 text-sm">
+                        <a href="#" className="hover:underline">Правовая информация</a>
+                        <a href="#" className="hover:underline">Карта сайта</a>
+                        <a href="#" className="hover:underline">Уведомление о рисках</a>
+                    </div>
+                    <div className="flex space-x-4">
+                        <a href="#" className="w-12 h-12 bg-white/10 flex items-center justify-center rounded-full hover:bg-white/20">
+                            <Facebook className="h-6 w-6" />
+                        </a>
+                        <a href="#" className="w-12 h-12 bg-white/10 flex items-center justify-center rounded-full hover:bg-white/20">
+                            <Instagram className="h-6 w-6" />
+                        </a>
+                        <a href="#" className="w-12 h-12 bg-white/10 flex items-center justify-center rounded-full hover:bg-white/20">
+                            <Send className="h-6 w-6" />
+                        </a>
+                    </div>
+                </div>
+                <div className="mt-16 text-sm">
+                    © 2025 IWM
+                </div>
+            </div>
+        </footer>
+    );
+};
 
 
 function App() {
