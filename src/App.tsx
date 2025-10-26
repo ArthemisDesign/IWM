@@ -176,14 +176,14 @@ const Invest = () => {
                 <div className="max-w-3xl mb-10 md:mb-16">
                     <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Начать инвестировать</p>
                     <h2 className="text-4xl md:text-6xl font-light">Самые интересные предложения на сегодня</h2>
-                </div>
+              </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.map((project, index) => (
                         <div key={index} className={`p-6 md:p-8 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
                              {project.image ? (
                                 <div className={`w-full h-auto aspect-square ${project.imageBgColor || 'bg-gray-100'} mb-6 rounded-lg flex items-center justify-center`}>
                                     <img src={project.image} alt={project.name} className="w-full h-full object-contain p-6" />
-                                </div>
+            </div>
                             ) : (
                                 <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg"></div>
                             )}
@@ -208,8 +208,8 @@ const Invest = () => {
                     <button className="bg-brand-black text-white px-8 py-4 rounded-full font-light hover:brightness-125 transition-colors uppercase tracking-wider">
                         Смотреть все проекты
                     </button>
-          </div>
-        </div>
+                        </div>
+                          </div>
       </section>
     );
 };
@@ -261,7 +261,7 @@ const UpcomingProjects = () => {
                 <div className="max-w-3xl mb-10 md:mb-16">
                     <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Совсем скоро на IWM</p>
                     <h2 className="text-4xl md:text-6xl font-light">Запуск совсем скоро</h2>
-                </div>
+                          </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
                     {projects.map((project, index) => (
                         <div key={index} className={`p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
@@ -271,38 +271,62 @@ const UpcomingProjects = () => {
                             <h3 className="font-light text-xl md:text-2xl mb-3">{project.title}</h3>
                             <p className="text-base md:text-lg text-gray-600 mb-6">{project.description}</p>
                             <button className="font-light text-custom-red text-lg md:text-xl hover:underline uppercase tracking-wider">Подробнее</button>
-                        </div>
+                      </div>
                     ))}
-                </div>
-            </div>
-        </section>
+          </div>
+        </div>
+      </section>
     );
 };
 
 // How It Works component
 const HowItWorks = () => {
     const steps = [
-        {title: 'Регистрация', description: 'создайте учетную запись за пару минут'},
-        {title: 'Выбор стратегии', description: 'выберите продукт или стратегию под свои цели'},
-        {title: 'Инвестиция', description: 'вложите средства и наблюдайте за ростом капитала'},
+        {
+            title: "Регистрация",
+            description: "создайте учетную запись за пару минут"
+        },
+        {
+            title: "Выбор стратегии",
+            description: "выберите продукт или стратегию под свои цели и риск-профиль"
+        },
+        {
+            title: "Инвестиция",
+            description: "вложите средства и наблюдайте за ростом вашего капитала"
+        },
     ];
+
+    const images = [
+        '/images/image 2076.png',
+        '/images/image 2079.png',
+        '/images/image 2080.png',
+        '/images/image 2083.png',
+        '/images/image 2084.png',
+        '/images/image 2085.png',
+        '/images/image 2086.png',
+        '/images/image 2087.png',
+        '/images/image 2088.png',
+    ];
+                      
                       return (
-    <section className="bg-white text-brand-black py-16 md:py-32">
-        <div className="container mx-auto px-6 text-left">
-            <h2 className="text-4xl md:text-6xl font-light mb-12 md:mb-20 text-center md:text-left">Всего три простых шага</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-                {steps.map((step, index) => (
-                    <div key={index} className={`p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
-                        <div className="w-full h-auto aspect-square bg-gray-100 mb-8 rounded-lg"></div>
-                        <div className="text-custom-red font-light font-n27 text-5xl mb-6">0{index + 1}</div>
-                        <h3 className="text-2xl md:text-3xl font-light mb-3">{step.title}</h3>
-                        <p className="text-base md:text-lg text-gray-600">{step.description}</p>
+        <section className="bg-white text-brand-black py-16 md:py-32">
+            <div className="container mx-auto px-6 text-left">
+                <h2 className="text-4xl md:text-6xl font-light mb-12 md:mb-20 text-center md:text-left">Всего три простых шага</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                    {steps.map((step, index) => (
+                        <div key={index} className={`p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
+                            <div className="w-full h-auto aspect-square bg-gray-100 mb-8 rounded-lg overflow-hidden">
+                                <img src={images[index % images.length]} alt={step.title} className="w-full h-full object-cover" />
                             </div>
-                ))}
-          </div>
-        </div>
-      </section>
-  );
+                            <div className="text-custom-red font-light font-n27 text-5xl mb-6">0{index + 1}</div>
+                            <h3 className="text-2xl md:text-3xl font-light mb-3">{step.title}</h3>
+                            <p className="text-base md:text-lg text-gray-600">{step.description}</p>
+                          </div>
+                    ))}
+              </div>
+            </div>
+        </section>
+    );
 };
 
 // Why IWM component
@@ -322,9 +346,21 @@ const WhyIWM = () => {
         }
     ];
 
+    const images = [
+        '/images/image 2076.png',
+        '/images/image 2079.png',
+        '/images/image 2080.png',
+        '/images/image 2083.png',
+        '/images/image 2084.png',
+        '/images/image 2085.png',
+        '/images/image 2086.png',
+        '/images/image 2087.png',
+        '/images/image 2088.png',
+    ];
+
     return (
         <section className="bg-white py-12 md:py-20">
-        <div className="container mx-auto px-6">
+            <div className="container mx-auto px-6">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     <div>
                         <h2 className="text-4xl md:text-6xl font-light mb-6">Почему IWM?</h2>
@@ -337,53 +373,78 @@ const WhyIWM = () => {
                         </p>
                         <button className="mt-12 bg-brand-black text-white px-8 py-4 rounded-full font-light hover:brightness-125 transition-colors uppercase tracking-wider">
                             Зарегистрироваться
-                    </button>
-                </div>
-                <div className="space-y-12">
+                        </button>
+                    </div>
+                    <div className="space-y-12">
                         {items.map((item, index) => (
                             <div key={index} className="flex items-start space-x-6">
-                                <div className="w-16 h-16 md:w-24 md:h-24 bg-gray-100 rounded-lg flex-shrink-0"></div>
+                                <div className="w-32 h-32 md:w-48 md:h-48 bg-gray-100 rounded-lg flex-shrink-0 overflow-hidden">
+                                    <img src={images[index % images.length]} alt={item.title} className="w-full h-full object-cover" />
+                                </div>
                                 <div>
                                     <h3 className="text-xl md:text-2xl font-light mb-2">{item.title}</h3>
                                     <p className="text-base md:text-lg text-gray-600">{item.description}</p>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
-      </section>
+        </section>
     );
 };
 
 // Capital Tiers component
 const CapitalTiers = () => {
-  const tiers = [
-      {title: 'IWM Navigation', description: 'инвестиционный консалтинг, разбор портфеля, выявление не эффективности и тд.'},
-      {title: 'IWM Private Wealth', description: 'расширенные возможности для опытных клиентов'},
-      {title: 'IWM Black', description: 'персональный подход для VIP-клиентов'},
-  ];
+    const tiers = [
+        {
+            title: "IWM Navigation",
+            description: "инвестиционный консалтинг, разбор портфеля, выявление не эффективности и тд."
+        },
+        {
+            title: "IWM Private Wealth",
+            description: "расширенные возможности для опытных клиентов"
+        },
+        {
+            title: "IWM Black",
+            description: "персональный подход для VIP-клиентов"
+        },
+    ];
 
-  return (
-    <section className="bg-white text-brand-black py-12 md:py-24">
+    const images = [
+        '/images/image 2076.png',
+        '/images/image 2079.png',
+        '/images/image 2080.png',
+        '/images/image 2083.png',
+        '/images/image 2084.png',
+        '/images/image 2085.png',
+        '/images/image 2086.png',
+        '/images/image 2087.png',
+        '/images/image 2088.png',
+    ];
+
+    return (
+        <section className="bg-white text-brand-black py-12 md:py-24">
       <div className="container mx-auto px-6">
-        <div className="max-w-2xl mb-10 md:mb-16">
-            <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">IWM Capital Tiers</p>
-            <h2 className="text-4xl md:text-6xl font-light mb-4">Особые предложения</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {tiers.map((tier, index) => (
-            <div key={index} className={`p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
-              <div className="w-full h-auto aspect-square bg-gray-100 mb-8 rounded-lg"></div>
-              <h3 className="text-2xl md:text-3xl font-light mb-4">{tier.title}</h3>
-              <p className="text-gray-600 text-base md:text-lg mb-6">{tier.description}</p>
-              <a href="#" className="font-light text-brand-black hover:underline uppercase tracking-wider">Узнать больше</a>
-            </div>
-          ))}
+                <div className="max-w-2xl mb-10 md:mb-16">
+                    <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">IWM Capital Tiers</p>
+                    <h2 className="text-4xl md:text-6xl font-light mb-4">Особые предложения</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {tiers.map((tier, index) => (
+                        <div key={index}>
+                            <div className="w-full h-auto aspect-square bg-gray-100 rounded-lg overflow-hidden mb-6">
+                                <img src={images[(index + 3) % images.length]} alt={tier.title} className="w-full h-full object-cover" />
+                            </div>
+                            <h3 className="text-2xl md:text-3xl font-light mb-4">{tier.title}</h3>
+                            <p className="text-gray-600 text-base md:text-lg mb-6 h-16">{tier.description}</p>
+                            <a href="#" className="font-light text-brand-black hover:underline uppercase tracking-wider">Узнать больше</a>
+              </div>
+            ))}
         </div>
       </div>
     </section>
-  );
+    );
 };
 
 // Partners component
@@ -417,9 +478,21 @@ const News = () => {
         {title: 'Заголовок третьей новости'},
     ];
 
+    const images = [
+        '/images/image 2076.png',
+        '/images/image 2079.png',
+        '/images/image 2080.png',
+        '/images/image 2083.png',
+        '/images/image 2084.png',
+        '/images/image 2085.png',
+        '/images/image 2086.png',
+        '/images/image 2087.png',
+        '/images/image 2088.png',
+    ];
+
     return (
         <section className="bg-white py-12 md:py-32">
-        <div className="container mx-auto px-6">
+            <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between md:items-end mb-10 md:mb-16">
                     <div className="mb-8 md:mb-0">
                         <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Новости</p>
@@ -431,13 +504,15 @@ const News = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {articles.map((article, index) => (
-                        <div key={index} className="p-6 md:p-8 rounded-lg">
-                            <div className="w-full h-auto aspect-square bg-gray-200 mb-6 rounded-lg"></div>
-                            <h3 className="text-xl md:text-2xl font-light leading-tight">{article.title}</h3>
-                            <a href="#" className="text-brand-black hover:underline mt-4 inline-block font-light uppercase tracking-wider">Узнать больше</a>
-          </div>
-              ))}
-            </div>
+                        <div key={index}>
+                            <div className="w-full h-auto aspect-square bg-gray-100 rounded-lg overflow-hidden mb-6">
+                                <img src={images[(index + 6) % images.length]} alt={article.title} className="w-full h-full object-cover" />
+                            </div>
+                            <h3 className="text-xl md:text-2xl font-light leading-tight mb-4">{article.title}</h3>
+                            <a href="#" className="text-brand-black hover:underline font-light uppercase tracking-wider">Узнать больше</a>
+                        </div>
+                    ))}
+                </div>
             </div>
         </section>
     );
