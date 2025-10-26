@@ -9,6 +9,8 @@ export default {
       colors: {
         'custom-red': '#FD6D5B',
         'custom-blue': '#3DC5DA',
+        'custom-teal': '#65BFCD',
+        'custom-salmon': '#E88073',
         'custom-grey': '#DFE3E2',
         'brand-black': '#323232',
         'pale-red': '#FDE4E1',

@@ -66,15 +66,18 @@ const slides = [
     title: "Станьте частью самых амбициозных проектов мира",
     subtitle: "Финансовая экосистема IWM открывает уникальные возможности для инвесторов и финансовых институтов по всему миру",
       buttonText: "Подробнее",
-      bgColor: "bg-custom-red",
+      bgColor: "bg-custom-salmon",
       image: "/slider images/2.png",
-      buttonColor: "bg-custom-blue"
+      buttonColor: "bg-custom-blue",
+      textColor: "text-brand-black",
+      buttonTextColor: "text-brand-black"
   },
   {
     title: "Надежность и прозрачность",
     subtitle: "Все данные по проектам доступны вам не раз в квартал, а в любой момент. В личном кабинете отражается актуальная статистика в реальном времени, а сводные показатели фонда и проектов всегда на виду.",
       buttonText: "Подробнее",
-      bgColor: "bg-gray-100"
+      bgColor: "bg-custom-teal",
+      image: "/slider images/4.png"
     }
   ];
 
@@ -103,15 +106,15 @@ const slides = [
       <div className="relative z-10 container mx-auto px-6 py-16 md:py-32 flex flex-col justify-center min-h-[calc(100vh-88px-1rem)] md:min-h-[calc(100vh-88px-3rem)]">
         <div className="text-left max-w-5xl">
           <div className="h-[28rem] flex flex-col justify-center">
-            <h1 className={`text-3xl sm:text-4xl md:text-6xl font-light mb-6 leading-tight transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-200'}`}>
+            <h1 className={`text-3xl sm:text-4xl md:text-6xl font-light mb-6 leading-tight transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-200'} ${slides[currentSlide].textColor || 'text-brand-black'}`}>
                 {slides[currentSlide].title}
           </h1>
-            <p className={`text-sm md:text-base text-gray-600 mb-10 max-w-3xl transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-300'}`}>
+            <p className={`text-sm md:text-base text-gray-600 mb-10 max-w-3xl transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-300'} ${slides[currentSlide].textColor || 'text-gray-600'}`}>
                 {slides[currentSlide].subtitle}
               </p>
             </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
-            <button className={`${slides[currentSlide].buttonColor || 'bg-custom-red'} text-white w-full sm:w-72 text-center px-10 py-4 rounded-full font-light transition-all duration-500 ease-in-out hover:brightness-95 uppercase tracking-wider ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-500'}`}>
+            <button className={`${slides[currentSlide].buttonColor || 'bg-custom-red'} ${slides[currentSlide].buttonTextColor || 'text-white'} w-full sm:w-72 text-center px-10 py-4 rounded-full font-light transition-all duration-500 ease-in-out hover:brightness-95 uppercase tracking-wider ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-500'}`}>
               {slides[currentSlide].buttonText}
             </button>
             <div className="flex items-center space-x-3">
@@ -162,83 +165,118 @@ const Milestones = () => {
 
 // Investment opportunities component
 const Invest = () => {
-  const projects = [
-      { name: 'Платформа РУ', risk: 'средний', term: '12 мес.', minAmount: '$100' },
-      { name: 'Bridgestone Capital / Strategy «A»', risk: 'высокий', term: '6 мес.', minAmount: '$500' },
-      { name: 'Bridgestone Capital / Strategy «7»', risk: 'низкий', term: '24 мес.', minAmount: '$100' },
-  ];
-
-  return (
-    <section className="bg-white py-12 md:py-24">
-      <div className="container mx-auto px-6">
-        <div className="max-w-3xl mb-10 md:mb-16">
-            <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Начать инвестировать</p>
-            <h2 className="text-4xl md:text-6xl font-light">Самые интересные предложения на сегодня</h2>
+    const projects = [
+        { name: 'Платформа РУ', risk: 'низкий', term: '12 мес.', minAmount: '$500' },
+        { name: 'Проект 2', risk: 'средний', term: '24 мес.', minAmount: '$1000' },
+        { name: 'Проект 3', risk: 'высокий', term: '6 мес.', minAmount: '$200' },
+    ];
+    return (
+        <section className="bg-white py-12 md:py-24">
+            <div className="container mx-auto px-6">
+                <div className="max-w-3xl mb-10 md:mb-16">
+                    <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Начать инвестировать</p>
+                    <h2 className="text-4xl md:text-6xl font-light">Самые интересные предложения на сегодня</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {projects.map((project, index) => (
+                        <div key={index} className={`p-6 md:p-8 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
+                             {project.image ? (
+                                <div className={`w-full h-auto aspect-square ${project.imageBgColor || 'bg-gray-100'} mb-6 rounded-lg flex items-center justify-center`}>
+                                    <img src={project.image} alt={project.name} className="w-full h-full object-contain p-6" />
+                                </div>
+                            ) : (
+                                <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg"></div>
+                            )}
+                            <h3 className="text-xl md:text-2xl font-light mb-4">{project.name}</h3>
+                            <div className="flex justify-between mb-6">
+                                <div>
+                                    <p className="text-gray-500 text-base">Риск:</p>
+                                    <p className="text-brand-black text-lg font-light">{project.risk}</p>
+                                    <p className="text-gray-500 text-base mt-4">Мин. сумма:</p>
+                                    <p className="text-brand-black text-lg font-light font-n27">{project.minAmount}</p>
               </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div key={index} className={`p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
-                <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg"></div>
-                <h3 className="text-xl md:text-2xl font-light mb-4">{project.name}</h3>
-              <div className="grid grid-cols-2 gap-x-4 md:gap-x-8 gap-y-4 text-sm md:text-md text-gray-600">
-                <div>
-                  <p className="font-semibold text-brand-black">Риск:</p>
-                  <p className="font-medium text-brand-black">{project.risk}</p>
-                        </div>
-                <div>
-                  <p className="font-semibold text-brand-black">Срок:</p>
-                  <p className="font-medium text-brand-black font-n27">{project.term}</p>
+                                <div className="text-right">
+                                    <p className="text-gray-500 text-base">Срок:</p>
+                                    <p className="text-brand-black text-lg font-light font-n27">{project.term}</p>
                           </div>
-                <div>
-                  <p className="font-semibold text-brand-black">Мин. сумма:</p>
-                  <p className="font-medium text-brand-black font-n27">{project.minAmount}</p>
-                        </div>
-              </div>
-              <a href="#" className="mt-6 inline-block font-semibold text-red-500 hover:underline">Подробнее</a>
-            </div>
-          ))}
-        </div>
-        <div className="text-center md:text-left mt-12 md:mt-20">
-          <button className="bg-brand-black text-white px-8 py-4 rounded-full font-light hover:brightness-125 transition-colors uppercase tracking-wider">
-            Смотреть все проекты
-          </button>
+                            </div>
+                            <a href="#" className="text-custom-red font-light text-lg">Подробнее</a>
+                      </div>
+                    ))}
+                  </div>
+                <div className="text-center md:text-left mt-12 md:mt-20">
+                    <button className="bg-brand-black text-white px-8 py-4 rounded-full font-light hover:brightness-125 transition-colors uppercase tracking-wider">
+                        Смотреть все проекты
+                    </button>
           </div>
         </div>
       </section>
-  );
+    );
 };
 
 // Upcoming Projects component
 const UpcomingProjects = () => {
-  const projects = [
-    { title: 'Global Trade Finance', description: 'Инструмент для финансирования международной торговли. Позволяет компаниям получать оборотный капитал под поставки товаров и снижать кассовые разрывы.' },
-    { title: 'Auto Capital', description: 'Инвестиционный продукт, связанный с рынком автомобилей. Возможность получать доход через финансирование. автокредитов и лизинга' },
-    { title: 'Real Estate Living Fund', description: 'Инвестиции в жилую недвижимость. Доступ к доходности рынка квартир при низком пороге входа.' },
-    { title: 'Bitcoin ETF', description: 'Биржевой фонд, повторяющий динамику биткоина. Удобный инструмент для инвесторов без прямой покупки криптовалюты.' },
-    { title: 'Solana Staking ETF', description: 'Биржевой фонд на Solana с автоматическим стейкингом. Инвесторы получают доходность от роста актива и вознаграждений за стейкинг.' },
-    { title: 'Kids Future Fund', description: 'Накопительный фонд для детей. Позволяет родителям формировать долгосрочные сбережения и капитал к совершеннолетию ребенка.' }
-  ];
+    const projects = [
+        {
+            title: "Global Trade Finance",
+            description: "Инструмент для финансирования международной торговли. Позволяет компаниям получать оборотный капитал под поставки товаров и снижать кассовые разрывы."
+        },
+        {
+            title: "Auto Capital",
+            description: "Инвестиционный продукт, связанный с рынком автомобилей. Возможность получать доход через финансирование автокредитов и лизинга"
+        },
+        {
+            title: "Real Estate Living Fund",
+            description: "Инвестиции в жилую недвижимость. Доступ к доходности рынка квартир при низком пороге входа."
+        },
+        { 
+            title: 'Bitcoin ETF', 
+            description: 'Биржевой фонд, повторяющий динамику биткоина. Удобный инструмент для инвесторов без прямой покупки криптовалюты.' 
+        },
+        { 
+            title: 'Solana Staking ETF', 
+            description: 'Биржевой фонд на Solana с автоматическим стейкингом. Инвесторы получают доходность от роста актива и вознаграждений за стейкинг.' 
+        },
+        { 
+            title: 'Kids Future Fund', 
+            description: 'Накопительный фонд для детей. Позволяет родителям формировать долгосрочные сбережения и капитал к совершеннолетию ребенка.' 
+        }
+    ];
 
-  return (
-    <section className="py-12 md:py-24 bg-white">
-      <div className="container mx-auto px-6">
-        <div className="max-w-3xl mb-10 md:mb-16">
-            <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Совсем скоро на IWM</p>
-            <h2 className="text-4xl md:text-6xl font-light">Запуск совсем скоро</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
-          {projects.map((project, index) => (
-            <div key={index} className={`p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
-              <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg"></div>
-              <h3 className="font-light text-xl md:text-2xl mb-3">{project.title}</h3>
-              <p className="text-base md:text-md text-gray-600 mb-6">{project.description}</p>
-              <button className="font-light text-brand-black hover:underline uppercase tracking-wider">Подробнее</button>
+    const images = [
+        '/images/image 2076.png',
+        '/images/image 2079.png',
+        '/images/image 2080.png',
+        '/images/image 2083.png',
+        '/images/image 2084.png',
+        '/images/image 2085.png',
+        '/images/image 2086.png',
+        '/images/image 2087.png',
+        '/images/image 2088.png',
+    ];
+
+    return (
+        <section className="py-12 md:py-24 bg-white">
+            <div className="container mx-auto px-6">
+                <div className="max-w-3xl mb-10 md:mb-16">
+                    <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Совсем скоро на IWM</p>
+                    <h2 className="text-4xl md:text-6xl font-light">Запуск совсем скоро</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
+                    {projects.map((project, index) => (
+                        <div key={index} className={`p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
+                            <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg overflow-hidden">
+                                <img src={images[index % images.length]} alt={project.title} className="w-full h-full object-cover" />
+                            </div>
+                            <h3 className="font-light text-xl md:text-2xl mb-3">{project.title}</h3>
+                            <p className="text-base md:text-lg text-gray-600 mb-6">{project.description}</p>
+                            <button className="font-light text-custom-red text-lg md:text-xl hover:underline uppercase tracking-wider">Подробнее</button>
+                        </div>
+                    ))}
+                </div>
             </div>
-            ))}
-          </div>
-        </div>
-      </section>
-  );
+        </section>
+    );
 };
 
 // How It Works component
@@ -256,7 +294,7 @@ const HowItWorks = () => {
                 {steps.map((step, index) => (
                     <div key={index} className={`p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
                         <div className="w-full h-auto aspect-square bg-gray-100 mb-8 rounded-lg"></div>
-                        <div className="text-red-500 font-semibold font-n27 text-lg md:text-xl mb-6">0{index + 1}</div>
+                        <div className="text-custom-red font-light font-n27 text-5xl mb-6">0{index + 1}</div>
                         <h3 className="text-2xl md:text-3xl font-light mb-3">{step.title}</h3>
                         <p className="text-base md:text-lg text-gray-600">{step.description}</p>
                             </div>
@@ -460,9 +498,9 @@ const Footer = () => {
           </div>
                 <div className="mt-10 md:mt-16 text-sm text-center md:text-left">
                     © <span className="font-n27">2025</span> IWM
-                </div>
-            </div>
-        </footer>
+          </div>
+        </div>
+      </footer>
     );
 };
 
