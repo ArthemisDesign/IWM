@@ -122,19 +122,28 @@ const Invest = () => {
   return (
     <section className="bg-white py-24">
       <div className="container mx-auto px-6">
-        <div className="max-w-2xl">
-            <h2 className="text-5xl font-medium mb-4">Самые интересные предложения на сегодня</h2>
-            <p className="text-lg text-gray-600 mb-12">Проекты, потенциал которых вы можете использовать прямо сейчас</p>
+        <div className="max-w-3xl mb-16">
+            <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Начать инвестировать</p>
+            <h2 className="text-6xl font-medium">Самые интересные предложения на сегодня</h2>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <div key={index}>
-                <div className="w-full h-48 bg-gray-200 mb-6"></div>
-                <h3 className="text-xl font-bold mb-4">{project.name}</h3>
-              <div className="text-sm text-gray-600 space-y-1">
-                <p><span className="font-medium text-black">Риск:</span> {project.risk}</p>
-                <p><span className="font-medium text-black">Срок:</span> {project.term}</p>
-                <p><span className="font-medium text-black">Мин. сумма:</span> {project.minAmount}</p>
+                <div className="w-full h-auto aspect-square bg-gray-100 mb-6"></div>
+                <h3 className="text-2xl font-medium mb-4">{project.name}</h3>
+              <div className="grid grid-cols-2 gap-x-8 gap-y-4 text-md text-gray-600">
+                <div>
+                  <p className="font-semibold text-black">Риск:</p>
+                  <p>{project.risk}</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-black">Срок:</p>
+                  <p>{project.term}</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-black">Мин. сумма:</p>
+                  <p>{project.minAmount}</p>
+                </div>
               </div>
               <a href="#" className="mt-6 inline-block font-semibold text-red-500 hover:underline">Подробнее</a>
             </div>
@@ -164,17 +173,17 @@ const UpcomingProjects = () => {
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-6">
-        <div className="max-w-2xl mb-16">
-            <h2 className="text-5xl font-medium">Запуск совсем <span className="text-red-500">скоро</span></h2>
-            <p className="mt-4 text-lg text-gray-600">Проекты, которые будут доступны для инвестирования в ближайшее время</p>
+        <div className="max-w-3xl mb-16">
+            <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Совсем скоро на IWM</p>
+            <h2 className="text-6xl font-medium">Запуск совсем скоро</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
           {projects.map((project, index) => (
             <div key={index}>
-              <div className="w-full h-48 bg-gray-200 mb-8"></div>
-              <h3 className="font-bold text-2xl mb-3">{project.title}</h3>
+              <div className="w-full h-auto aspect-square bg-gray-100 mb-6"></div>
+              <h3 className="font-semibold text-2xl mb-3">{project.title}</h3>
               <p className="text-md text-gray-600 mb-6">{project.description}</p>
-              <button className="font-semibold text-red-500 hover:underline">Подробнее</button>
+              <button className="font-semibold text-black hover:underline uppercase tracking-wider">Подробнее</button>
             </div>
           ))}
         </div>
@@ -193,15 +202,14 @@ const HowItWorks = () => {
   return (
     <section className="bg-white text-black py-32">
         <div className="container mx-auto px-6 text-left">
-            <h2 className="text-5xl font-medium mb-4">Как это работает?</h2>
-            <p className="text-lg text-gray-600 mb-20">Всего три простых шага</p>
+            <h2 className="text-6xl font-medium mb-20">Всего три простых шага</h2>
             <div className="grid md:grid-cols-3 gap-12">
                 {steps.map((step, index) => (
                     <div key={index} className="pt-8">
-                        <div className="w-full h-48 bg-gray-200 mb-8"></div>
-                        <div className="text-red-500 font-bold text-2xl mb-6">0{index + 1}</div>
+                        <div className="w-full h-auto aspect-square bg-gray-100 mb-8"></div>
+                        <div className="text-red-500 font-semibold text-xl mb-6">0{index + 1}</div>
                         <h3 className="text-3xl font-medium mb-3">{step.title}</h3>
-                        <p className="text-gray-600">{step.description}</p>
+                        <p className="text-gray-600 text-lg">{step.description}</p>
                     </div>
                 ))}
             </div>
@@ -256,17 +264,17 @@ const CapitalTiers = () => {
   return (
     <section className="bg-white text-black py-24">
       <div className="container mx-auto px-6">
-        <div className="max-w-2xl">
-            <h2 className="text-5xl font-medium mb-4">Особые предложения</h2>
-            <p className="text-lg text-gray-600 mb-16">Эксклюзивные решения, адаптированные под ваш уровень инвестиций</p>
+        <div className="max-w-2xl mb-16">
+            <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">IWM Capital Tiers</p>
+            <h2 className="text-6xl font-medium mb-4">Особые предложения</h2>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {tiers.map((tier, index) => (
-            <div key={index} className="bg-white p-8">
-              <div className="w-full h-48 bg-gray-100 mb-8"></div>
-              <h3 className="text-2xl font-bold mb-4">{tier.title}</h3>
-              <p className="text-gray-600 mb-6 h-24">{tier.description}</p>
-              <a href="#" className="font-semibold text-red-500 hover:underline">Узнать больше</a>
+            <div key={index}>
+              <div className="w-full h-auto aspect-square bg-gray-100 mb-8"></div>
+              <h3 className="text-3xl font-medium mb-4">{tier.title}</h3>
+              <p className="text-gray-600 text-lg mb-6">{tier.description}</p>
+              <a href="#" className="font-semibold text-black hover:underline uppercase tracking-wider">Узнать больше</a>
             </div>
           ))}
         </div>
@@ -282,13 +290,13 @@ const Partners = () => {
         <section className="bg-white py-24">
             <div className="container mx-auto px-6">
                 <div className="max-w-2xl mb-16">
-                    <h2 className="text-5xl font-medium">Партнеры IWM</h2>
-                    <p className="mt-4 text-lg text-gray-600">Мы работаем с лучшими</p>
+                    <h2 className="text-6xl font-medium">Партнеры IWM</h2>
+                    <p className="mt-4 text-xl text-gray-600">Мы работаем с лучшими</p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {partners.map((partner, index) => (
                         <div key={index}>
-                            <div className="w-full h-32 bg-gray-200 mb-6"></div>
+                            <div className="w-full h-auto aspect-square bg-gray-100 mb-6"></div>
                             <h3 className="text-xl font-medium">{partner}</h3>
                         </div>
                     ))}
@@ -309,21 +317,21 @@ const News = () => {
     return (
         <section className="bg-gray-50 py-32">
             <div className="container mx-auto px-6">
-                <div className="flex justify-between items-end mb-12">
+                <div className="flex justify-between items-end mb-16">
                     <div>
-                        <h2 className="text-5xl font-medium">Новости</h2>
-                        <p className="text-lg text-gray-600 mt-4">Главные рыночные события и аналитика в одном месте</p>
+                        <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Новости</p>
+                        <h2 className="text-6xl font-medium">Главные рыночные<br/>события и аналитика</h2>
                     </div>
-                    <button className="border-2 border-gray-200 px-8 py-3 font-semibold hover:bg-gray-200 transition-colors whitespace-nowrap">
+                    <button className="bg-white border-2 border-gray-200 px-8 py-3 font-semibold hover:bg-gray-200 transition-colors whitespace-nowrap uppercase tracking-wider">
                         Смотреть все новости
                     </button>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8">
                     {articles.map((article, index) => (
                         <div key={index}>
-                            <div className="w-full h-72 bg-gray-200 mb-6"></div>
+                            <div className="w-full h-auto aspect-square bg-gray-200 mb-6"></div>
                             <h3 className="text-2xl font-medium leading-tight">{article.title}</h3>
-                            <a href="#" className="text-red-500 hover:underline mt-4 inline-block font-semibold">Узнать больше</a>
+                            <a href="#" className="text-black hover:underline mt-4 inline-block font-semibold uppercase tracking-wider">Узнать больше</a>
                         </div>
                     ))}
                 </div>
