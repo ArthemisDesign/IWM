@@ -166,7 +166,7 @@ const Milestones = () => {
 // Investment opportunities component
 const Invest = () => {
     const projects = [
-        { name: 'Платформа РУ', risk: 'низкий', term: '12 мес.', minAmount: '$500' },
+        { name: 'Платформа РУ', risk: 'низкий', term: '12 мес.', minAmount: '$500', image: '/partners/Rectangle 899-1.png' },
         { name: 'Проект 2', risk: 'средний', term: '24 мес.', minAmount: '$1000' },
         { name: 'Проект 3', risk: 'высокий', term: '6 мес.', minAmount: '$200' },
     ];
@@ -182,7 +182,7 @@ const Invest = () => {
                         <div key={index} className={`p-6 md:p-8 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
                              {project.image ? (
                                 <div className={`w-full h-auto aspect-square ${project.imageBgColor || 'bg-gray-100'} mb-6 rounded-lg flex items-center justify-center`}>
-                                    <img src={project.image} alt={project.name} className="w-full h-full object-contain p-6" />
+                                    <img src={project.image} alt={project.name} className="w-full h-full object-contain" />
             </div>
                             ) : (
                                 <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg"></div>
