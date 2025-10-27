@@ -167,8 +167,8 @@ const Milestones = () => {
 const Invest = () => {
     const projects = [
         { name: 'Платформа РУ', risk: 'низкий', term: '12 мес.', minAmount: '$500', image: '/partners/Rectangle 899-1.png' },
-        { name: 'Проект 2', risk: 'средний', term: '24 мес.', minAmount: '$1000' },
-        { name: 'Проект 3', risk: 'высокий', term: '6 мес.', minAmount: '$200' },
+        { name: 'Bridgestone Capital', risk: 'средний', term: '24 мес.', minAmount: '$1000', image: '/partners/Rectangle 912.png' },
+        { name: 'AIFC', risk: 'высокий', term: '6 мес.', minAmount: '$200', image: '/partners/Rectangle 913.png' },
     ];
     return (
         <section className="bg-white py-12 md:py-24">
@@ -449,7 +449,12 @@ const CapitalTiers = () => {
 
 // Partners component
 const Partners = () => {
-    const partners = ['МФЦА', 'Партнер 2', 'Партнер 3', 'Партнер 4'];
+    const partners = [
+        { name: 'ПЛАТФОРМА.РУ', image: '/partners/Rectangle 899-1.png' },
+        { name: 'STONEBRIDGE', image: '/partners/Rectangle 912.png' },
+        { name: 'AIFC', image: '/partners/Rectangle 913.png' },
+        { name: 'TRADE FINANCE GLOBAL', image: '/partners/Rectangle 899.png' }
+    ];
     return (
         <section className="bg-white py-12 md:py-24">
         <div className="container mx-auto px-6">
@@ -460,8 +465,10 @@ const Partners = () => {
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
                     {partners.map((partner, index) => (
                         <div key={index} className={`p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
-                            <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg"></div>
-                            <h3 className="text-lg md:text-xl font-light">{partner}</h3>
+                            <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg overflow-hidden">
+                                <img src={partner.image} alt={partner.name} className="w-full h-full object-contain"/>
+                            </div>
+                            <h3 className="text-lg md:text-xl font-light">{partner.name}</h3>
                 </div>
               ))}
           </div>
