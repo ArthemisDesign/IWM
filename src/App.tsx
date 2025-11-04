@@ -3,9 +3,16 @@ import { ChevronLeft, ChevronRight, Facebook, Instagram, Send, Menu, X } from 'l
 
 const hoverColors = ['hover:bg-pale-red', 'hover:bg-pale-blue', 'hover:bg-pale-grey'];
 
+const navLinks = [
+    { id: 'investors', href: '#marketplace', text: 'Для инвесторов' },
+    { id: 'business', href: '#business', text: 'Для бизнеса' },
+    { id: 'about', href: '#about', text: 'О компании' },
+];
+
 // Header component
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState('investors');
 
   return (
     <header className="bg-white sticky top-0 z-50">
@@ -13,10 +20,21 @@ const Header = () => {
         <div className="flex items-center justify-start">
           <img src="/LOGO.svg" alt="IWM Logo" className="h-8" />
         </div>
-        <div className="hidden md:flex items-center justify-center space-x-10 text-sm font-semibold tracking-wider flex-1">
-          <a href="#marketplace" className="text-brand-black uppercase">Для инвесторов</a>
-          <a href="#business" className="text-gray-500 hover:text-brand-black uppercase">Для бизнеса</a>
-          <a href="#about" className="text-gray-500 hover:text-brand-black uppercase">О компании</a>
+        <div className="hidden md:flex items-center justify-center space-x-4 text-xs font-light tracking-wider flex-1">
+            {navLinks.map((link) => (
+                <a
+                    key={link.id}
+                    href={link.href}
+                    onClick={() => setActiveNav(link.id)}
+                    className={`uppercase transition-colors duration-300 px-5 py-2 rounded-full ${
+                        activeNav === link.id
+                            ? 'bg-custom-red text-white'
+                            : 'text-gray-500 hover:text-brand-black'
+                    }`}
+                >
+                    {link.text}
+                </a>
+            ))}
         </div>
         <div className="hidden md:flex items-center justify-end space-x-6 text-sm">
           <span className="cursor-pointer font-light">Ru</span>
@@ -31,9 +49,23 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white absolute top-full left-0 w-full shadow-lg">
           <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
-            <a href="#marketplace" className="text-brand-black uppercase font-light">Для инвесторов</a>
-            <a href="#business" className="text-gray-500 hover:text-brand-black uppercase font-light">Для бизнеса</a>
-            <a href="#about" className="text-gray-500 hover:text-brand-black uppercase font-light">О компании</a>
+            {navLinks.map((link) => (
+                <a
+                    key={link.id}
+                    href={link.href}
+                    onClick={() => {
+                        setActiveNav(link.id);
+                        setIsMenuOpen(false);
+                    }}
+                    className={`uppercase font-light text-xs ${
+                        activeNav === link.id
+                            ? 'text-brand-black'
+                            : 'text-gray-500 hover:text-brand-black'
+                    }`}
+                >
+                    {link.text}
+                </a>
+            ))}
             <div className="flex flex-col space-y-4 pt-4 border-t border-gray-200">
                 <span className="cursor-pointer font-light">Ru</span>
                 <a href="#login" className="font-light bg-brand-black text-white px-6 py-3 rounded-full hover:brightness-125 transition uppercase text-center">Личный кабинет</a>
@@ -273,7 +305,7 @@ const UpcomingProjects = () => {
                                 <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg overflow-hidden">
                                     <img src={images[index % images.length]} alt={project.title} className="w-full h-full object-cover" />
                                 </div>
-                                <h3 className="font-light text-xl md:text-2xl mb-3">{project.title}</h3>
+                                <h3 className="font-extrabold text-2xl md:text-3xl mb-3 text-custom-blue">{project.title}</h3>
                                 <p className="text-base md:text-lg text-gray-600 mb-6">{project.description}</p>
                             </div>
                             <button className="mt-auto self-start font-light text-custom-red text-lg md:text-xl hover:underline uppercase tracking-wider">Подробнее</button>
