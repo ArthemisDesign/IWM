@@ -16,11 +16,11 @@ const Header = () => {
 
   return (
     <header className="bg-white sticky top-0 z-50">
-      <nav className="container mx-auto px-6 py-5 flex justify-between items-center">
-        <div className="flex items-center justify-start">
+      <nav className="px-2 md:px-6 py-5 flex justify-between items-center">
+        <div className="flex-1 flex justify-start">
           <img src="/LOGO.svg" alt="IWM Logo" className="h-8" />
         </div>
-        <div className="hidden md:flex items-center justify-center space-x-4 text-xs font-light tracking-wider flex-1">
+        <div className="hidden md:flex items-center justify-center space-x-20 text-xs font-light tracking-wider">
             {navLinks.map((link) => (
                 <a
                     key={link.id}
@@ -36,7 +36,7 @@ const Header = () => {
                 </a>
             ))}
         </div>
-        <div className="hidden md:flex items-center justify-end space-x-6 text-sm">
+        <div className="flex-1 hidden md:flex items-center justify-end space-x-6 text-sm">
           <span className="cursor-pointer font-light">Ru</span>
           <a href="#login" className="font-light bg-brand-black text-white px-6 py-3 rounded-full hover:brightness-125 transition uppercase">Личный кабинет</a>
         </div>
@@ -48,7 +48,7 @@ const Header = () => {
       </nav>
       {isMenuOpen && (
         <div className="md:hidden bg-white absolute top-full left-0 w-full shadow-lg">
-          <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
+          <div className="px-2 py-4 flex flex-col space-y-4">
             {navLinks.map((link) => (
                 <a
                     key={link.id}
@@ -150,10 +150,10 @@ const slides = [
               {slides[currentSlide].buttonText}
             </button>
             <div className="flex items-center space-x-3">
-              <button onClick={prevSlide} className="w-12 h-12 rounded-full border-2 border-gray-700 text-gray-700 flex items-center justify-center hover:bg-black/10">
+              <button onClick={prevSlide} className="w-12 h-12 rounded-full border-2 border-brand-black text-brand-black flex items-center justify-center hover:bg-black/10">
                     <ChevronLeft className="h-6 w-6" />
                 </button>
-              <button onClick={nextSlide} className="w-12 h-12 rounded-full border-2 border-gray-700 text-gray-700 flex items-center justify-center hover:bg-black/10">
+              <button onClick={nextSlide} className="w-12 h-12 rounded-full border-2 border-brand-black text-brand-black flex items-center justify-center hover:bg-black/10">
                     <ChevronRight className="h-6 w-6" />
             </button>
             </div>
@@ -305,7 +305,7 @@ const UpcomingProjects = () => {
                                 <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg overflow-hidden">
                                     <img src={images[index % images.length]} alt={project.title} className="w-full h-full object-cover" />
                                 </div>
-                                <h3 className="font-extrabold text-2xl md:text-3xl mb-3 text-custom-blue">{project.title}</h3>
+                                <h3 className="font-light text-2xl md:text-3xl mb-3 text-custom-blue">{project.title}</h3>
                                 <p className="text-base md:text-lg text-gray-600 mb-6">{project.description}</p>
                             </div>
                             <button className="mt-auto self-start font-light text-custom-red text-lg md:text-xl hover:underline uppercase tracking-wider">Подробнее</button>
@@ -403,10 +403,10 @@ const WhyIWM = () => {
                     <div>
                         <h2 className="text-4xl md:text-6xl font-light mb-6">Почему IWM?</h2>
                         <p className="text-lg md:text-xl text-gray-600 mb-8">Мы делаем инвестиции доступными и надежными</p>
-                        <p className="text-base md:text-lg text-gray-700 mb-6">
+                        <p className="text-base md:text-lg text-brand-black mb-6">
                             IWM – инвестиционный маркетплейс, предоставляющий частным инвесторам доступ к фондам и проектам, которые ранее были доступны только профессиональным участникам рынка.
                         </p>
-                        <p className="text-base md:text-lg text-gray-700">
+                        <p className="text-base md:text-lg text-brand-black">
                             Разнообразие и диверсификация – широкий выбор инвестиционных инструментов для вашего портфеля.
                         </p>
                         <button className="mt-12 bg-brand-black text-white px-8 py-4 rounded-full font-light hover:brightness-125 transition-colors uppercase tracking-wider">
@@ -572,15 +572,15 @@ const Subscription = () => {
           <h2 className="text-4xl md:text-5xl font-light leading-tight">Будьте в курсе лучших инвест-идей</h2>
           <p className="mt-8 text-base md:text-lg text-gray-600">Ежедневная аналитика и инсайты, которые помогут принимать взвешенные инвестиционные решения.</p>
           <p className="mt-6 text-base md:text-lg text-gray-600">Получайте отборные рыночные обзоры, перспективные идеи и стратегические прогнозы от экспертов IWM. Только проверенные данные, без шума и лишней информации. Подпишитесь и инвестируйте с уверенностью в каждом шаге.</p>
-          <p className="mt-10 text-gray-800 text-base md:text-lg"><span className="font-bold">9 000+</span> подписчиков с нами – мы делимся только тем, что используем сами.</p>
+          <p className="mt-10 text-brand-black text-base md:text-lg"><span className="font-bold">9 000+</span> подписчиков с нами – мы делимся только тем, что используем сами.</p>
         </div>
         <div className="flex flex-col justify-center">
             <div className="space-y-4">
-                <p className="text-gray-700 font-light text-lg">Преимущества подписки:</p>
+                <p className="text-brand-black font-light text-lg">Преимущества подписки:</p>
                 <div className="flex flex-wrap gap-3">
-                    <span className="bg-gray-100 text-gray-800 px-4 py-2 text-sm font-light rounded-md">Актуальные тренды рынков</span>
-                    <span className="bg-gray-100 text-gray-800 px-4 py-2 text-sm font-light rounded-md">Рабочие идеи для роста капитала</span>
-                    <span className="bg-gray-100 text-gray-800 px-4 py-2 text-sm font-light rounded-md">Обзоры ключевых событий и сделок</span>
+                    <span className="bg-gray-100 text-brand-black px-4 py-2 text-sm font-light rounded-md">Актуальные тренды рынков</span>
+                    <span className="bg-gray-100 text-brand-black px-4 py-2 text-sm font-light rounded-md">Рабочие идеи для роста капитала</span>
+                    <span className="bg-gray-100 text-brand-black px-4 py-2 text-sm font-light rounded-md">Обзоры ключевых событий и сделок</span>
               </div>
             </div>
             <div className="mt-12 max-w-xl">
@@ -632,13 +632,21 @@ function App() {
       <main>
         <Slider />
         <Milestones />
+        <div className="border-t-4 border-brand-black" />
         <Invest />
+        <div className="border-t-4 border-brand-black" />
         <UpcomingProjects />
+        <div className="border-t-4 border-brand-black" />
         <HowItWorks />
+        <div className="border-t-4 border-brand-black" />
         <WhyIWM />
+        <div className="border-t-4 border-brand-black" />
         <CapitalTiers />
+        <div className="border-t-4 border-brand-black" />
         <Partners />
+        <div className="border-t-4 border-brand-black" />
         <News />
+        <div className="border-t-4 border-brand-black" />
         <Subscription />
       </main>
       <Footer />
