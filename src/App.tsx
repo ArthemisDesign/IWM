@@ -278,7 +278,7 @@ const Invest = () => {
                                     </div>
                                 </div>
                             </div>
-                            <a href="#" className="mt-auto self-start text-custom-red font-light text-lg md:text-xl hover:underline uppercase tracking-wider">Подробнее</a>
+                            <a href="#" className="mt-auto self-start text-custom-red font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full hover:bg-custom-red hover:text-white transition-colors">Подробнее</a>
                       </div>
                     ))}
                   </div>
@@ -350,7 +350,7 @@ const UpcomingProjects = () => {
                                 <h3 className="font-light text-2xl md:text-3xl mb-3 text-custom-blue">{project.title}</h3>
                                 <p className="text-base md:text-lg text-white/80 mb-6">{project.description}</p>
                             </div>
-                            <button className="mt-auto self-start font-light text-custom-red text-lg md:text-xl hover:underline uppercase tracking-wider">Подробнее</button>
+                            <button className="mt-auto self-start font-light text-custom-red text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full hover:bg-custom-red hover:text-white transition-colors">Подробнее</button>
                       </div>
                     ))}
           </div>
@@ -515,6 +515,30 @@ const CapitalTiers = () => {
         },
     ];
 
+    const tierBlocks = [
+        {
+            ...tiers[0],
+            bgColor: 'bg-custom-red',
+            titleColor: 'text-white',
+            descriptionColor: 'text-white/80',
+            linkColor: 'text-white'
+        },
+        {
+            ...tiers[1],
+            bgColor: 'bg-custom-blue',
+            titleColor: 'text-white',
+            descriptionColor: 'text-white/80',
+            linkColor: 'text-white'
+        },
+        {
+            ...tiers[2],
+            bgColor: 'bg-custom-grey',
+            titleColor: 'text-brand-black',
+            descriptionColor: 'text-brand-black/80',
+            linkColor: 'text-custom-red'
+        }
+    ];
+
     const images = [
         '/images/image 2076.png',
         '/images/image 2079.png',
@@ -535,14 +559,16 @@ const CapitalTiers = () => {
                     <h2 className="text-4xl md:text-6xl font-light mb-4">Особые предложения</h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {tiers.map((tier, index) => (
-                        <div key={index}>
-                            <div className="w-full h-auto aspect-square bg-gray-100 rounded-lg overflow-hidden mb-6">
-                                <img src={images[(index + 3) % images.length]} alt={tier.title} className="w-full h-full object-cover" />
+                    {tierBlocks.map((tier, index) => (
+                        <div key={index} className={`flex flex-col p-6 md:p-8 rounded-3xl ${tier.bgColor}`}>
+                            <div>
+                                <div className="w-full h-auto aspect-square bg-gray-100 rounded-3xl overflow-hidden mb-6">
+                                    <img src={images[(index + 3) % images.length]} alt={tier.title} className="w-full h-full object-cover" />
+                                </div>
+                                <h3 className={`text-2xl md:text-3xl font-light mb-4 ${tier.titleColor}`}>{tier.title}</h3>
+                                <p className={`text-base md:text-lg mb-6 ${tier.descriptionColor}`}>{tier.description}</p>
                             </div>
-                            <h3 className="text-2xl md:text-3xl font-light mb-4">{tier.title}</h3>
-                            <p className="text-gray-600 text-base md:text-lg mb-6 h-16">{tier.description}</p>
-                            <a href="#" className="font-light text-custom-red text-lg md:text-xl hover:underline uppercase tracking-wider">Узнать больше</a>
+                            <a href="#" className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors ${tier.linkColor} hover:bg-custom-red hover:text-white`}>{ "Узнать больше" }</a>
               </div>
             ))}
         </div>
@@ -615,12 +641,12 @@ const News = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {articles.map((article, index) => (
-                        <div key={index}>
-                            <div className="w-full h-auto aspect-square bg-gray-100 rounded-lg overflow-hidden mb-6">
+                        <div key={index} className="text-left">
+                            <div className="w-full h-auto aspect-square bg-gray-100 rounded-3xl overflow-hidden mb-6">
                                 <img src={images[(index + 6) % images.length]} alt={article.title} className="w-full h-full object-cover" />
                             </div>
                             <h3 className="text-xl md:text-2xl font-light leading-tight mb-4">{article.title}</h3>
-                            <a href="#" className="font-light text-custom-red text-lg md:text-xl hover:underline uppercase tracking-wider">Узнать больше</a>
+                            <a href="#" className="inline-block font-light text-custom-red text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full hover:bg-custom-red hover:text-white transition-colors">Узнать больше</a>
                         </div>
                     ))}
                 </div>
