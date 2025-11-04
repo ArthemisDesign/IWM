@@ -83,33 +83,54 @@ const Slider = () => {
 const slides = [
   {
       title: "Инвестируйте в те проекты и стратегии, которые подходят персонально для вас",
-    subtitle: "Выбирайте из широкого спектра вариантов, которые соответствуют вашим интересам, ценностям, финансовым целям и уровню риска, который для вас комфортен",
+      subtitle: "Выбирайте из широкого спектра вариантов, которые соответствуют вашим интересам, ценностям, финансовым целям и уровню риска, который для вас комфортен",
       buttonText: "Начать",
       bgColor: "bg-custom-blue",
-      image: "/slider images/1.png"
+      image: "/slider images/1.png",
+      buttonColor: "bg-custom-red",
+      titleColor: "text-white",
+      subtitleColor: "text-white/80",
+      buttonTextColor: "text-white",
+      arrowClasses: "border-white text-white",
+      arrowHover: "hover:bg-white/10"
   },
   {
     title: "Платформа РУ",
     subtitle: "Алгоритмическая стратегия, ранее доступная только квалифицированным инвесторам, теперь открыта на IWM",
       buttonText: "Узнать больше",
-      bgColor: "bg-pale-blue"
+      bgColor: "bg-brand-black",
+      buttonColor: "bg-custom-grey",
+      titleColor: "text-white",
+      subtitleColor: "text-white/80",
+      buttonTextColor: "text-brand-black",
+      arrowClasses: "border-white text-white",
+      arrowHover: "hover:bg-white/10"
   },
   {
     title: "Станьте частью самых амбициозных проектов мира",
     subtitle: "Финансовая экосистема IWM открывает уникальные возможности для инвесторов и финансовых институтов по всему миру",
       buttonText: "Подробнее",
-      bgColor: "bg-custom-salmon",
+      bgColor: "bg-custom-red",
       image: "/slider images/2.png",
-      buttonColor: "bg-custom-blue",
-      textColor: "text-brand-black",
-      buttonTextColor: "text-brand-black"
+      buttonColor: "bg-brand-black",
+      titleColor: "text-brand-black",
+      subtitleColor: "text-brand-black/80",
+      buttonTextColor: "text-white",
+      arrowClasses: "border-brand-black text-brand-black",
+      arrowHover: "hover:bg-black/10"
   },
   {
     title: "Надежность и прозрачность",
     subtitle: "Все данные по проектам доступны вам не раз в квартал, а в любой момент. В личном кабинете отражается актуальная статистика в реальном времени, а сводные показатели фонда и проектов всегда на виду.",
       buttonText: "Подробнее",
-      bgColor: "bg-custom-teal",
-      image: "/slider images/4.png"
+      bgColor: "bg-custom-grey",
+      image: "/slider images/4.png",
+      buttonColor: "bg-custom-blue",
+      titleColor: "text-brand-black",
+      subtitleColor: "text-brand-black/80",
+      buttonTextColor: "text-white",
+      arrowClasses: "border-brand-black text-brand-black",
+      arrowHover: "hover:bg-black/10"
     }
   ];
 
@@ -135,13 +156,13 @@ const slides = [
 
   return (
     <section className={`relative overflow-hidden m-2 md:m-6 transition-colors duration-500 ease-in-out rounded-3xl ${slides[currentSlide].bgColor}`}>
-      <div className="relative z-10 container mx-auto px-6 py-16 md:py-32 flex flex-col justify-center min-h-[calc(100vh-88px-1rem)] md:min-h-[calc(100vh-88px-3rem)]">
+      <div className="relative z-10 container mx-auto px-6 pt-16 pb-80 md:py-32 flex flex-col justify-center min-h-[calc(100vh-88px-1rem)] md:min-h-[calc(100vh-88px-3rem)]">
         <div className="text-left max-w-5xl">
-          <div className="h-[28rem] flex flex-col justify-center">
-            <h1 className={`text-3xl sm:text-4xl md:text-6xl font-light mb-6 leading-tight transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-200'} ${slides[currentSlide].textColor || 'text-brand-black'}`}>
+          <div className="h-auto md:h-[28rem] flex flex-col justify-center">
+            <h1 className={`text-3xl sm:text-4xl md:text-6xl font-light mb-6 leading-tight transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-200'} ${slides[currentSlide].titleColor || 'text-brand-black'}`}>
                 {slides[currentSlide].title}
           </h1>
-            <p className={`text-sm md:text-base text-gray-600 mb-10 max-w-3xl transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-300'} ${slides[currentSlide].textColor || 'text-gray-600'}`}>
+            <p className={`text-sm md:text-base mb-10 max-w-3xl transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-300'} ${slides[currentSlide].subtitleColor || 'text-gray-600'}`}>
                 {slides[currentSlide].subtitle}
               </p>
             </div>
@@ -150,10 +171,10 @@ const slides = [
               {slides[currentSlide].buttonText}
             </button>
             <div className="flex items-center space-x-3">
-              <button onClick={prevSlide} className="w-12 h-12 rounded-full border-2 border-brand-black text-brand-black flex items-center justify-center hover:bg-black/10">
+              <button onClick={prevSlide} className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-colors ${slides[currentSlide].arrowClasses} ${slides[currentSlide].arrowHover}`}>
                     <ChevronLeft className="h-6 w-6" />
                 </button>
-              <button onClick={nextSlide} className="w-12 h-12 rounded-full border-2 border-brand-black text-brand-black flex items-center justify-center hover:bg-black/10">
+              <button onClick={nextSlide} className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-colors ${slides[currentSlide].arrowClasses} ${slides[currentSlide].arrowHover}`}>
                     <ChevronRight className="h-6 w-6" />
             </button>
             </div>
@@ -164,7 +185,7 @@ const slides = [
         <img
           src={slides[currentSlide].image}
           alt=""
-          className={`absolute bottom-0 right-[-15rem] max-h-full w-4/5 object-contain transition-all duration-500 ease-in-out pointer-events-none ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-100'}`}
+          className={`absolute bottom-0 right-0 w-full max-h-[40vh] md:w-4/5 md:right-[-15rem] md:max-h-full object-contain transition-all duration-500 ease-in-out pointer-events-none ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-100'}`}
         />
       )}
     </section>
@@ -179,14 +200,35 @@ const Milestones = () => {
     { value: '$18+ млн', label: 'привлеченных инвестиций' },
   ];
 
+  const statBlocks = [
+    {
+      ...stats[0],
+      bgColor: 'bg-custom-red',
+      textColor: 'text-white',
+      labelColor: 'text-white/80',
+    },
+    {
+      ...stats[1],
+      bgColor: 'bg-custom-blue',
+      textColor: 'text-white',
+      labelColor: 'text-white/80',
+    },
+    {
+      ...stats[2],
+      bgColor: 'bg-custom-grey',
+      textColor: 'text-brand-black',
+      labelColor: 'text-gray-500',
+    }
+  ];
+
   return (
     <section className="bg-white py-12 md:py-24">
         <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {stats.map((stat, index) => (
-            <div key={index} className="text-left pb-8">
-              <p className="text-4xl md:text-5xl font-n27 font-light">{stat.value}</p>
-              <p className="mt-4 text-gray-500">{stat.label}</p>
+            {statBlocks.map((stat, index) => (
+            <div key={index} className={`text-left p-8 rounded-3xl ${stat.bgColor}`}>
+              <p className={`text-4xl md:text-5xl font-n27 font-light ${stat.textColor}`}>{stat.value}</p>
+              <p className={`mt-4 ${stat.labelColor}`}>{stat.label}</p>
             </div>
             ))}
           </div>
@@ -300,13 +342,13 @@ const UpcomingProjects = () => {
                           </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
                     {projects.map((project, index) => (
-                        <div key={index} className={`flex flex-col p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
+                        <div key={index} className={`flex flex-col p-6 md:p-8 transition-colors duration-300 rounded-3xl bg-brand-black`}>
                             <div>
-                                <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg overflow-hidden">
+                                <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-3xl overflow-hidden">
                                     <img src={images[index % images.length]} alt={project.title} className="w-full h-full object-cover" />
                                 </div>
                                 <h3 className="font-light text-2xl md:text-3xl mb-3 text-custom-blue">{project.title}</h3>
-                                <p className="text-base md:text-lg text-gray-600 mb-6">{project.description}</p>
+                                <p className="text-base md:text-lg text-white/80 mb-6">{project.description}</p>
                             </div>
                             <button className="mt-auto self-start font-light text-custom-red text-lg md:text-xl hover:underline uppercase tracking-wider">Подробнее</button>
                       </div>
@@ -334,6 +376,30 @@ const HowItWorks = () => {
         },
     ];
 
+    const stepBlocks = [
+        {
+            ...steps[0],
+            bgColor: 'bg-custom-red',
+            numberColor: 'text-white/80',
+            titleColor: 'text-white',
+            descriptionColor: 'text-white/80'
+        },
+        {
+            ...steps[1],
+            bgColor: 'bg-custom-blue',
+            numberColor: 'text-white/80',
+            titleColor: 'text-white',
+            descriptionColor: 'text-white/80'
+        },
+        {
+            ...steps[2],
+            bgColor: 'bg-custom-grey',
+            numberColor: 'text-brand-black/50',
+            titleColor: 'text-brand-black',
+            descriptionColor: 'text-brand-black/80'
+        }
+    ];
+
     const images = [
         '/images/image 2076.png',
         '/images/image 2079.png',
@@ -348,17 +414,17 @@ const HowItWorks = () => {
                       
                       return (
         <section className="bg-white text-brand-black py-16 md:py-32">
-            <div className="container mx-auto px-6 text-left">
-                <h2 className="text-4xl md:text-6xl font-light mb-12 md:mb-20 text-center md:text-left">Всего три простых шага</h2>
+            <div className="container mx-auto px-6 text-center md:text-left">
+                <h2 className="text-4xl md:text-6xl font-light mb-12 md:mb-20">Всего три простых шага</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-                    {steps.map((step, index) => (
-                        <div key={index} className={`p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
-                            <div className="w-full h-auto aspect-square bg-gray-100 mb-8 rounded-lg overflow-hidden">
+                    {stepBlocks.map((step, index) => (
+                        <div key={index} className={`p-6 md:p-8 rounded-3xl ${step.bgColor}`}>
+                            <div className="w-full h-auto aspect-square bg-gray-100 mb-8 rounded-3xl overflow-hidden">
                                 <img src={images[index % images.length]} alt={step.title} className="w-full h-full object-cover" />
                             </div>
-                            <div className="text-custom-red font-light font-n27 text-5xl mb-6">0{index + 1}</div>
-                            <h3 className="text-2xl md:text-3xl font-light mb-3">{step.title}</h3>
-                            <p className="text-base md:text-lg text-gray-600">{step.description}</p>
+                            <div className={`font-light font-n27 text-5xl mb-6 ${step.numberColor}`}>0{index + 1}</div>
+                            <h3 className={`text-2xl md:text-3xl font-light mb-3 ${step.titleColor}`}>{step.title}</h3>
+                            <p className={`text-base md:text-lg ${step.descriptionColor}`}>{step.description}</p>
                           </div>
                     ))}
               </div>
@@ -400,7 +466,7 @@ const WhyIWM = () => {
         <section className="bg-white py-12 md:py-20">
             <div className="container mx-auto px-6">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                    <div>
+                    <div className="text-center lg:text-left">
                         <h2 className="text-4xl md:text-6xl font-light mb-6">Почему IWM?</h2>
                         <p className="text-lg md:text-xl text-gray-600 mb-8">Мы делаем инвестиции доступными и надежными</p>
                         <p className="text-base md:text-lg text-brand-black mb-6">
@@ -463,7 +529,7 @@ const CapitalTiers = () => {
 
     return (
         <section className="bg-white text-brand-black py-12 md:py-24">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 text-center md:text-left">
                 <div className="max-w-2xl mb-10 md:mb-16">
                     <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">IWM Capital Tiers</p>
                     <h2 className="text-4xl md:text-6xl font-light mb-4">Особые предложения</h2>
@@ -495,7 +561,7 @@ const Partners = () => {
     ];
     return (
         <section className="bg-white py-12 md:py-24">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 text-center md:text-left">
                 <div className="max-w-2xl mb-10 md:mb-16">
                     <h2 className="text-4xl md:text-6xl font-light">Партнеры IWM</h2>
                     <p className="mt-4 text-lg md:text-xl text-gray-600">Мы работаем с лучшими</p>
@@ -567,8 +633,8 @@ const News = () => {
 const Subscription = () => {
   return (
     <section className="bg-white py-16 md:py-32">
-      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
-        <div>
+      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+        <div className="text-center md:text-left">
           <h2 className="text-4xl md:text-5xl font-light leading-tight">Будьте в курсе лучших инвест-идей</h2>
           <p className="mt-8 text-base md:text-lg text-gray-600">Ежедневная аналитика и инсайты, которые помогут принимать взвешенные инвестиционные решения.</p>
           <p className="mt-6 text-base md:text-lg text-gray-600">Получайте отборные рыночные обзоры, перспективные идеи и стратегические прогнозы от экспертов IWM. Только проверенные данные, без шума и лишней информации. Подпишитесь и инвестируйте с уверенностью в каждом шаге.</p>
@@ -632,21 +698,21 @@ function App() {
       <main>
         <Slider />
         <Milestones />
-        <div className="border-t-4 border-brand-black" />
+        <div className="border-t border-brand-black" />
         <Invest />
-        <div className="border-t-4 border-brand-black" />
+        <div className="border-t border-brand-black" />
         <UpcomingProjects />
-        <div className="border-t-4 border-brand-black" />
+        <div className="border-t border-brand-black" />
         <HowItWorks />
-        <div className="border-t-4 border-brand-black" />
+        <div className="border-t border-brand-black" />
         <WhyIWM />
-        <div className="border-t-4 border-brand-black" />
+        <div className="border-t border-brand-black" />
         <CapitalTiers />
-        <div className="border-t-4 border-brand-black" />
+        <div className="border-t border-brand-black" />
         <Partners />
-        <div className="border-t-4 border-brand-black" />
+        <div className="border-t border-brand-black" />
         <News />
-        <div className="border-t-4 border-brand-black" />
+        <div className="border-t border-brand-black" />
         <Subscription />
       </main>
       <Footer />
