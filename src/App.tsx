@@ -179,28 +179,32 @@ const Invest = () => {
               </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.map((project, index) => (
-                        <div key={index} className={`p-6 md:p-8 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
-                             {project.image ? (
-                                <div className={`w-full h-auto aspect-square ${project.imageBgColor || 'bg-gray-100'} mb-6 rounded-lg flex items-center justify-center`}>
-                                    <img src={project.image} alt={project.name} className="w-full h-full object-contain" />
-            </div>
-                            ) : (
-                                <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg"></div>
-                            )}
-                            <h3 className="text-xl md:text-2xl font-light mb-4">{project.name}</h3>
-                            <div className="flex justify-between mb-6">
-                                <div>
-                                    <p className="text-gray-500 text-base">Риск:</p>
-                                    <p className="text-brand-black text-lg font-light">{project.risk}</p>
-                                    <p className="text-gray-500 text-base mt-4">Мин. сумма:</p>
-                                    <p className="text-brand-black text-lg font-light font-n27">{project.minAmount}</p>
-              </div>
-                                <div className="text-right">
-                                    <p className="text-gray-500 text-base">Срок:</p>
-                                    <p className="text-brand-black text-lg font-light font-n27">{project.term}</p>
-                          </div>
+                        <div key={index} className={`flex flex-col p-6 md:p-8 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
+                            <div>
+                                {project.image ? (
+                                    <div className={`w-full h-auto aspect-square ${project.imageBgColor || 'bg-gray-100'} mb-6 rounded-3xl flex items-center justify-center overflow-hidden`}>
+                                        <img src={project.image} alt={project.name} className="w-full h-full object-contain" />
+                                    </div>
+                                ) : (
+                                    <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-3xl"></div>
+                                )}
+                                <h3 className="text-xl md:text-2xl font-light mb-4">{project.name}</h3>
+                                <div className="mb-6 space-y-2">
+                                    <div className="flex justify-between">
+                                        <p className="text-gray-500 text-xl">Риск:</p>
+                                        <p className="text-brand-black text-2xl font-light">{project.risk}</p>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <p className="text-gray-500 text-xl">Срок:</p>
+                                        <p className="text-brand-black text-2xl font-light font-n27">{project.term}</p>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <p className="text-gray-500 text-xl">Мин. сумма:</p>
+                                        <p className="text-brand-black text-2xl font-light font-n27">{project.minAmount}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <a href="#" className="text-custom-red font-light text-lg">Подробнее</a>
+                            <a href="#" className="mt-auto self-start text-custom-red font-light text-lg md:text-xl hover:underline uppercase tracking-wider">Подробнее</a>
                       </div>
                     ))}
                   </div>
@@ -264,13 +268,15 @@ const UpcomingProjects = () => {
                           </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
                     {projects.map((project, index) => (
-                        <div key={index} className={`p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
-                            <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg overflow-hidden">
-                                <img src={images[index % images.length]} alt={project.title} className="w-full h-full object-cover" />
+                        <div key={index} className={`flex flex-col p-6 md:p-8 transition-colors duration-300 rounded-lg ${hoverColors[index % hoverColors.length]}`}>
+                            <div>
+                                <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-lg overflow-hidden">
+                                    <img src={images[index % images.length]} alt={project.title} className="w-full h-full object-cover" />
+                                </div>
+                                <h3 className="font-light text-xl md:text-2xl mb-3">{project.title}</h3>
+                                <p className="text-base md:text-lg text-gray-600 mb-6">{project.description}</p>
                             </div>
-                            <h3 className="font-light text-xl md:text-2xl mb-3">{project.title}</h3>
-                            <p className="text-base md:text-lg text-gray-600 mb-6">{project.description}</p>
-                            <button className="font-light text-custom-red text-lg md:text-xl hover:underline uppercase tracking-wider">Подробнее</button>
+                            <button className="mt-auto self-start font-light text-custom-red text-lg md:text-xl hover:underline uppercase tracking-wider">Подробнее</button>
                       </div>
                     ))}
           </div>
@@ -438,7 +444,7 @@ const CapitalTiers = () => {
                             </div>
                             <h3 className="text-2xl md:text-3xl font-light mb-4">{tier.title}</h3>
                             <p className="text-gray-600 text-base md:text-lg mb-6 h-16">{tier.description}</p>
-                            <a href="#" className="font-light text-brand-black hover:underline uppercase tracking-wider">Узнать больше</a>
+                            <a href="#" className="font-light text-custom-red text-lg md:text-xl hover:underline uppercase tracking-wider">Узнать больше</a>
               </div>
             ))}
         </div>
@@ -516,7 +522,7 @@ const News = () => {
                                 <img src={images[(index + 6) % images.length]} alt={article.title} className="w-full h-full object-cover" />
                             </div>
                             <h3 className="text-xl md:text-2xl font-light leading-tight mb-4">{article.title}</h3>
-                            <a href="#" className="text-brand-black hover:underline font-light uppercase tracking-wider">Узнать больше</a>
+                            <a href="#" className="font-light text-custom-red text-lg md:text-xl hover:underline uppercase tracking-wider">Узнать больше</a>
                         </div>
                     ))}
                 </div>
