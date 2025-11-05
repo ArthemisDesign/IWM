@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Facebook, Instagram, Send } from 'lucide-react';
 import Footer from '../components/Footer';
 import Marquee from "react-fast-marquee";
+import CountUp from 'react-countup';
+import { useInView } from 'react-intersection-observer';
 
 const hoverColors = ['hover:bg-pale-red', 'hover:bg-pale-blue', 'hover:bg-pale-grey'];
 
@@ -121,10 +123,15 @@ const Slider = () => {
 
     // Milestones component
     const Milestones = () => {
+      const { ref, inView } = useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+      });
+
       const stats = [
-        { value: '10 000+', label: 'пользователей' },
-        { value: '20+', label: 'реализованных успешных инвестиционных идей' },
-        { value: '$18+ млн', label: 'привлеченных инвестиций' },
+        { value: 10000, label: 'пользователей', suffix: '+' },
+        { value: 20, label: 'реализованных успешных инвестиционных идей', suffix: '+' },
+        { value: 18, label: 'привлеченных инвестиций', prefix: '$', suffix: '+ млн' },
       ];
 
       const statBlocks = [
@@ -149,12 +156,23 @@ const Slider = () => {
       ];
 
       return (
-        <section className="bg-white py-12 md:py-24">
+        <section className="bg-white py-12 md:py-24" ref={ref}>
             <div className="container mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
                 {statBlocks.map((stat, index) => (
                 <div key={index} className={`text-left p-8 rounded-3xl ${stat.bgColor}`}>
-                  <p className={`text-4xl md:text-5xl font-n27 font-light ${stat.textColor}`}>{stat.value}</p>
+                  <p className={`text-4xl md:text-5xl font-n27 font-light ${stat.textColor}`}>
+                    {inView &&
+                      <CountUp 
+                        start={0} 
+                        end={stat.value} 
+                        duration={2.5} 
+                        separator=" "
+                        prefix={stat.prefix}
+                        suffix={stat.suffix}
+                      />
+                    }
+                  </p>
                   <p className={`mt-4 ${stat.labelColor}`}>{stat.label}</p>
                 </div>
                 ))}
@@ -176,19 +194,19 @@ const Slider = () => {
             {
                 ...projects[0],
                 bgColor: 'bg-custom-red',
-                titleColor: 'text-white',
-                labelColor: 'text-white/80',
-                valueColor: 'text-white',
-                linkColor: 'text-white',
+                titleColor: 'text-brand-black',
+                labelColor: 'text-brand-black/80',
+                valueColor: 'text-brand-black',
+                linkColor: 'text-brand-black',
                 imageBgColor: 'bg-white',
             },
             {
                 ...projects[1],
                 bgColor: 'bg-custom-blue',
-                titleColor: 'text-white',
-                labelColor: 'text-white/80',
-                valueColor: 'text-white',
-                linkColor: 'text-white',
+                titleColor: 'text-brand-black',
+                labelColor: 'text-brand-black/80',
+                valueColor: 'text-brand-black',
+                linkColor: 'text-brand-black',
                 imageBgColor: 'bg-white',
             },
             {
@@ -220,7 +238,7 @@ const Slider = () => {
                                     ) : (
                                         <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-3xl"></div>
                                     )}
-                                    <h3 className={`text-xl md:text-2xl font-light mb-4 ${project.titleColor}`}>{project.name}</h3>
+                                    <h3 className={`text-2xl md:text-3xl font-medium mb-4 ${project.titleColor}`}>{project.name}</h3>
                                     <div className="mb-6 space-y-2">
                                         <div className="flex justify-between">
                                             <p className={`text-xl ${project.labelColor}`}>Риск:</p>
@@ -279,6 +297,12 @@ const Slider = () => {
             }
         ];
 
+        const projectCardStyles = [
+            { bgColor: 'bg-custom-red', titleColor: 'text-white', descriptionColor: 'text-white/80', buttonColor: 'text-white', buttonHover: 'hover:bg-white/20' },
+            { bgColor: 'bg-custom-blue', titleColor: 'text-white', descriptionColor: 'text-white/80', buttonColor: 'text-white', buttonHover: 'hover:bg-white/20' },
+            { bgColor: 'bg-custom-grey', titleColor: 'text-brand-black', descriptionColor: 'text-brand-black/80', buttonColor: 'text-custom-red', buttonHover: 'hover:bg-custom-red hover:text-white' },
+        ];
+
         const images = [
             '/images/image 2076.png',
             '/images/image 2079.png',
@@ -292,25 +316,27 @@ const Slider = () => {
         ];
 
         return (
-            <section className="py-12 md:py-24 bg-white">
+            <section className="py-12 md:py-24 bg-brand-black">
                 <div className="container mx-auto px-6">
                     <div className="max-w-3xl mb-10 md:mb-16">
-                        <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Совсем скоро на IWM</p>
-                        <h2 className="text-4xl md:text-6xl font-light">Запуск совсем скоро</h2>
+                        <p className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-3">Совсем скоро на IWM</p>
+                        <h2 className="text-4xl md:text-6xl font-light text-white">Запуск совсем скоро</h2>
                               </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
-                        {projects.map((project, index) => (
-                            <div key={index} className={`flex flex-col p-6 md:p-8 transition-colors duration-300 rounded-3xl bg-brand-black`}>
+                        {projects.map((project, index) => {
+                            const style = projectCardStyles[index % projectCardStyles.length];
+                            return (
+                            <div key={index} className={`flex flex-col p-6 md:p-8 transition-colors duration-300 rounded-3xl ${style.bgColor}`}>
                                 <div>
                                     <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-3xl overflow-hidden">
                                         <img src={images[index % images.length]} alt={project.title} className="w-full h-full object-cover" />
                                     </div>
-                                    <h3 className="font-light text-2xl md:text-3xl mb-3 text-custom-blue">{project.title}</h3>
-                                    <p className="text-base md:text-lg text-white/80 mb-6 font-light">{project.description}</p>
+                                    <h3 className={`font-medium text-2xl md:text-3xl mb-3 ${style.titleColor}`}>{project.title}</h3>
+                                    <p className={`text-base md:text-lg mb-6 ${style.descriptionColor}`}>{project.description}</p>
                                 </div>
-                                <button className="mt-auto self-start font-light text-custom-red text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full hover:bg-custom-red hover:text-white transition-colors">Подробнее</button>
+                                <button className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors ${style.buttonColor} ${style.buttonHover}`}>Подробнее</button>
                           </div>
-                        ))}
+                        )})}
               </div>
             </div>
           </section>
@@ -442,19 +468,19 @@ const Slider = () => {
         ];
 
         return (
-            <section className="bg-white py-12 md:py-20">
+            <section className="bg-brand-black text-custom-grey py-12 md:py-20">
                 <div className="container mx-auto px-6">
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                         <div className="text-center lg:text-left">
                             <h2 className="text-4xl md:text-6xl font-light mb-6">Почему IWM?</h2>
-                            <p className="text-lg md:text-xl text-gray-600 mb-8">Мы делаем инвестиции доступными и надежными</p>
-                            <p className="text-base md:text-lg text-brand-black mb-6">
+                            <p className="text-lg md:text-xl text-custom-grey/80 mb-8">Мы делаем инвестиции доступными и надежными</p>
+                            <p className="text-base md:text-lg text-custom-grey mb-6">
                                 IWM – инвестиционный маркетплейс, предоставляющий частным инвесторам доступ к фондам и проектам, которые ранее были доступны только профессиональным участникам рынка.
                             </p>
-                            <p className="text-base md:text-lg text-brand-black">
+                            <p className="text-base md:text-lg text-custom-grey">
                                 Разнообразие и диверсификация – широкий выбор инвестиционных инструментов для вашего портфеля.
                             </p>
-                            <button className="mt-12 bg-brand-black text-white px-8 py-4 rounded-full font-light hover:brightness-125 transition-colors uppercase tracking-wider">
+                            <button className="mt-12 bg-custom-red text-white px-8 py-4 rounded-full font-light hover:brightness-125 transition-colors uppercase tracking-wider">
                                 Зарегистрироваться
                             </button>
                         </div>

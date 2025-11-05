@@ -33,7 +33,7 @@ const BusinessPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Step 1 */}
             <div className="bg-white p-8 rounded-2xl shadow-sm">
-              <h3 className="text-xl font-semibold mb-4 text-custom-blue">Подача заявки и отбор</h3>
+              <h3 className="text-xl font-light mb-4 text-custom-blue">Подача заявки и отбор</h3>
               <p className="font-semibold mb-2">Что происходит:</p>
               <ul className="list-disc list-inside text-gray-600 space-y-2 mb-4">
                 <li>Вы заполняете онлайн-форму с базовой информацией</li>
@@ -49,7 +49,7 @@ const BusinessPage = () => {
             </div>
             {/* Step 2 */}
             <div className="bg-white p-8 rounded-2xl shadow-sm">
-              <h3 className="text-xl font-semibold mb-4 text-custom-blue">Подготовка проекта</h3>
+              <h3 className="text-xl font-light mb-4 text-custom-blue">Подготовка проекта</h3>
               <p className="font-semibold mb-2">Что происходит:</p>
               <ul className="list-disc list-inside text-gray-600 space-y-2 mb-4">
                 <li>Юридическая интеграция в выбранной юрисдикции (AIFC, Грузия, ОАЭ)</li>
@@ -65,7 +65,7 @@ const BusinessPage = () => {
             </div>
             {/* Step 3 */}
             <div className="bg-white p-8 rounded-2xl shadow-sm">
-              <h3 className="text-xl font-semibold mb-4 text-custom-blue">Запуск и привлечение инвестиций</h3>
+              <h3 className="text-xl font-light mb-4 text-custom-blue">Запуск и привлечение инвестиций</h3>
               <p className="font-semibold mb-2">Что происходит:</p>
               <ul className="list-disc list-inside text-gray-600 space-y-2 mb-4">
                 <li>Публикация проекта на платформе</li>
@@ -81,7 +81,7 @@ const BusinessPage = () => {
             </div>
             {/* Step 4 */}
             <div className="bg-white p-8 rounded-2xl shadow-sm">
-              <h3 className="text-xl font-semibold mb-4 text-custom-blue">Сопровождение и отчётность</h3>
+              <h3 className="text-xl font-light mb-4 text-custom-blue">Сопровождение и отчётность</h3>
               <p className="font-semibold mb-2">Что происходит:</p>
               <ul className="list-disc list-inside text-gray-600 space-y-2 mb-4">
                 <li>Отчёты для инвесторов</li>
@@ -109,40 +109,40 @@ const BusinessPage = () => {
 
           <div className="mt-12 md:mt-20 grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-2xl font-semibold mb-4">Платформа, которая соединяет вас с частными и институциональными инвесторами по всему миру</h3>
+              <h3 className="text-2xl font-light mb-4">Платформа, которая соединяет вас с частными и институциональными инвесторами по всему миру</h3>
               <p className="text-gray-600 mb-6">Размещение компании на IWM - это не просто поиск финансирования, а выход на международную аудиторию инвесторов, партнёров и клиентов. Мы обеспечиваем юридическую инфраструктуру, маркетинг и удобную цифровую платформу для привлечения капитала.</p>
               <button className="bg-brand-black text-white px-8 py-4 rounded-full font-light hover:brightness-125 transition-colors uppercase tracking-wider">
                 Подать заявку
               </button>
             </div>
             <div>
-              <h4 className="text-xl font-semibold mb-4">4 Этапа выхода на IWM для компаний:</h4>
+              <h4 className="text-xl font-light mb-4">4 Этапа выхода на IWM для компаний:</h4>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <span className="bg-custom-red text-white rounded-full h-8 w-8 text-center leading-8 font-semibold mr-4 flex-shrink-0">1</span>
                   <div>
-                    <h5 className="font-semibold">Подача заявки</h5>
+                    <h5 className="font-light">Подача заявки</h5>
                     <p className="text-gray-600">Заполняете онлайн-форму с базовыми данными: описание бизнеса, финансовые показатели, цели привлечения. Проходите первичный скоринг.</p>
                   </div>
                 </li>
                 <li className="flex items-start">
                   <span className="bg-custom-red text-white rounded-full h-8 w-8 text-center leading-8 font-semibold mr-4 flex-shrink-0">2</span>
                   <div>
-                    <h5 className="font-semibold">Подготовка профиля</h5>
+                    <h5 className="font-light">Подготовка профиля</h5>
                     <p className="text-gray-600">Создание инвестиционной страницы, презентации, видео, и настройка опций для инвесторов.</p>
                   </div>
                 </li>
                 <li className="flex items-start">
                   <span className="bg-custom-red text-white rounded-full h-8 w-8 text-center leading-8 font-semibold mr-4 flex-shrink-0">3</span>
                   <div>
-                    <h5 className="font-semibold">Запуск кампании</h5>
+                    <h5 className="font-light">Запуск кампании</h5>
                     <p className="text-gray-600">Публикация проекта и анонс в каналах IWM, участие в вебинарах и питч-сессиях.</p>
                   </div>
                 </li>
                 <li className="flex items-start">
                   <span className="bg-custom-red text-white rounded-full h-8 w-8 text-center leading-8 font-semibold mr-4 flex-shrink-0">4</span>
                   <div>
-                    <h5 className="font-semibold">Сопровождение и рост</h5>
+                    <h5 className="font-light">Сопровождение и рост</h5>
                     <p className="text-gray-600">Отчётность перед инвесторами, поддержка при последующих раундах и возможность выхода на вторичный рынок.</p>
                   </div>
                 </li>
@@ -151,29 +151,29 @@ const BusinessPage = () => {
           </div>
 
           <div className="mt-16">
-            <h4 className="text-xl font-semibold text-center mb-8">Преимущества для компаний и стартапов</h4>
+            <h4 className="text-xl font-light text-center mb-8">Преимущества для компаний и стартапов</h4>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="bg-gray-100 p-6 rounded-lg">
-                <h5 className="font-semibold mb-2">Международная аудитория</h5>
+                <h5 className="font-light mb-2">Международная аудитория</h5>
                 <p className="text-gray-600">Доступ к инвесторам из Европы, Азии, Ближнего Востока.</p>
               </div>
               <div className="bg-gray-100 p-6 rounded-lg">
-                <h5 className="font-semibold mb-2">Юридическая защита</h5>
+                <h5 className="font-light mb-2">Юридическая защита</h5>
                 <p className="text-gray-600">Сделки оформляются через надёжные юрисдикции.</p>
               </div>
               <div className="bg-gray-100 p-6 rounded-lg">
-                <h5 className="font-semibold mb-2">Гибкий формат инвестиций</h5>
+                <h5 className="font-light mb-2">Гибкий формат инвестиций</h5>
                 <p className="text-gray-600">От $100 до миллионов долларов.</p>
               </div>
               <div className="bg-gray-100 p-6 rounded-lg">
-                <h5 className="font-semibold mb-2">Маркетинговая поддержка</h5>
+                <h5 className="font-light mb-2">Маркетинговая поддержка</h5>
                 <p className="text-gray-600">Подготовка материалов, продвижение, медийная кампания.</p>
               </div>
             </div>
           </div>
 
           <div className="mt-16 text-center">
-            <h4 className="text-xl font-semibold mb-2">Форматы сотрудничества</h4>
+            <h4 className="text-xl font-light mb-2">Форматы сотрудничества</h4>
             <p className="text-gray-600 mb-6">Equity crowdfunding, прямые инвестиции, конвертируемые займы / SAFE.</p>
             <h2 className="text-3xl md:text-4xl font-light mb-4">Начните привлекать капитал уже сегодня</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
@@ -197,41 +197,41 @@ const BusinessPage = () => {
 
           <div className="mt-12 md:mt-20 grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-2xl font-semibold mb-4">Платформа, которая объединяет фонды с квалифицированными и частными инвесторами в глобальном масштабе</h3>
+              <h3 className="text-2xl font-light mb-4">Платформа, которая объединяет фонды с квалифицированными и частными инвесторами в глобальном масштабе</h3>
               <p className="text-gray-600 mb-6">Мы помогаем инвестиционным фондам привлекать капитал, расширять базу инвесторов и эффективно управлять коммуникацией с ними. IWM предоставляет инфраструктуру, маркетинг и технологические решения для масштабирования бизнеса.</p>
               <button className="bg-brand-black text-white px-8 py-4 rounded-full font-light hover:brightness-125 transition-colors uppercase tracking-wider">
                 Подать заявку
               </button>
             </div>
             <div>
-              <h4 className="text-xl font-semibold mb-4">Этапы подключения фонда к IWM:</h4>
+              <h4 className="text-xl font-light mb-4">Этапы подключения фонда к IWM:</h4>
               <ul className="space-y-4 text-gray-600">
-                <li><span className="font-semibold text-brand-black">Подача заявки</span> - базовая анкета с описанием стратегии фонда.</li>
-                <li><span className="font-semibold text-brand-black">Юридическая и комплаенс-проверка</span> - проверка лицензий, структур.</li>
-                <li><span className="font-semibold text-brand-black">Публикация инвестиционного профиля</span> - описание фонда, стратегии, результатов.</li>
-                <li><span className="font-semibold text-brand-black">Запуск маркетинга</span> - email-кампании, таргет, мероприятия.</li>
-                <li><span className="font-semibold text-brand-black">Сопровождение инвесторов</span> - отчётность, новости, вторичный рынок.</li>
+                <li><span className="font-light text-brand-black">Подача заявки</span> - базовая анкета с описанием стратегии фонда.</li>
+                <li><span className="font-light text-brand-black">Юридическая и комплаенс-проверка</span> - проверка лицензий, структур.</li>
+                <li><span className="font-light text-brand-black">Публикация инвестиционного профиля</span> - описание фонда, стратегии, результатов.</li>
+                <li><span className="font-light text-brand-black">Запуск маркетинга</span> - email-кампании, таргет, мероприятия.</li>
+                <li><span className="font-light text-brand-black">Сопровождение инвесторов</span> - отчётность, новости, вторичный рынок.</li>
               </ul>
             </div>
           </div>
 
           <div className="mt-16">
-            <h4 className="text-xl font-semibold text-center mb-8">Преимущества для фондов</h4>
+            <h4 className="text-xl font-light text-center mb-8">Преимущества для фондов</h4>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h5 className="font-semibold mb-2">Международная аудитория</h5>
+                <h5 className="font-light mb-2">Международная аудитория</h5>
                 <p className="text-gray-600">Выход на частных и институциональных инвесторов.</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h5 className="font-semibold mb-2">Гибкость кампаний</h5>
+                <h5 className="font-light mb-2">Гибкость кампаний</h5>
                 <p className="text-gray-600">Возможность привлечения капитала через публичные и приватные кампании.</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h5 className="font-semibold mb-2">Маркетинговая и PR-поддержка</h5>
+                <h5 className="font-light mb-2">Маркетинговая и PR-поддержка</h5>
                 <p className="text-gray-600">Поддержка от команды IWM.</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h5 className="font-semibold mb-2">Технологическая инфраструктура</h5>
+                <h5 className="font-light mb-2">Технологическая инфраструктура</h5>
                 <p className="text-gray-600">Доступ к инфраструктуре для учёта инвесторов и сделок.</p>
               </div>
             </div>
@@ -263,22 +263,22 @@ const BusinessPage = () => {
           </div>
 
           <div className="mt-16">
-            <h4 className="text-2xl font-semibold text-center mb-8">Форматы партнёрства</h4>
+            <h4 className="text-2xl font-light text-center mb-8">Форматы партнёрства</h4>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
               <div>
-                <h5 className="font-semibold text-xl mb-2">Финансовые партнёры</h5>
+                <h5 className="font-light text-xl mb-2">Финансовые партнёры</h5>
                 <p className="text-gray-600">Банки, брокеры, платежные провайдеры.</p>
               </div>
               <div>
-                <h5 className="font-semibold text-xl mb-2">Юридические и налоговые консультанты</h5>
+                <h5 className="font-light text-xl mb-2">Юридические и налоговые консультанты</h5>
                 <p className="text-gray-600">Сопровождение сделок и инвесторов.</p>
               </div>
               <div>
-                <h5 className="font-semibold text-xl mb-2">Маркетинговые партнёры</h5>
+                <h5 className="font-light text-xl mb-2">Маркетинговые партнёры</h5>
                 <p className="text-gray-600">PR-агентства, медиа, блогеры.</p>
               </div>
               <div>
-                <h5 className="font-semibold text-xl mb-2">Образовательные партнёры</h5>
+                <h5 className="font-light text-xl mb-2">Образовательные партнёры</h5>
                 <p className="text-gray-600">Бизнес-школы, тренеры, аналитические центры.</p>
               </div>
             </div>
