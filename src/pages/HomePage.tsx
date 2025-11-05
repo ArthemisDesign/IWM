@@ -98,10 +98,10 @@ const Slider = () => {
                   {slides[currentSlide].buttonText}
                 </button>
                 <div className="flex items-center space-x-3">
-                  <button onClick={prevSlide} className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-colors ${slides[currentSlide].arrowClasses} ${slides[currentSlide].arrowHover}`}>
+                  <button onClick={prevSlide} className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-colors duration-500 ${slides[currentSlide].arrowClasses} ${slides[currentSlide].arrowHover}`}>
                         <ChevronLeft className="h-6 w-6" />
                     </button>
-                  <button onClick={nextSlide} className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-colors ${slides[currentSlide].arrowClasses} ${slides[currentSlide].arrowHover}`}>
+                  <button onClick={nextSlide} className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-colors duration-500 ${slides[currentSlide].arrowClasses} ${slides[currentSlide].arrowHover}`}>
                         <ChevronRight className="h-6 w-6" />
                 </button>
                 </div>
@@ -570,25 +570,21 @@ const Slider = () => {
                 ...partners[0],
                 bgColor: 'bg-custom-red',
                 titleColor: 'text-white',
-                imageBgColor: 'bg-white'
             },
             {
                 ...partners[1],
                 bgColor: 'bg-custom-blue',
                 titleColor: 'text-white',
-                imageBgColor: 'bg-white'
             },
             {
                 ...partners[2],
                 bgColor: 'bg-custom-grey',
                 titleColor: 'text-brand-black',
-                imageBgColor: 'bg-white'
             },
             {
                 ...partners[3],
                 bgColor: 'bg-brand-black',
                 titleColor: 'text-white',
-                imageBgColor: 'bg-white'
             }
         ];
 
@@ -602,8 +598,8 @@ const Slider = () => {
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
                     {partnerBlocks.map((partner, index) => (
                         <div key={index} className={`p-6 md:p-8 rounded-3xl text-center ${partner.bgColor}`}>
-                            <div className={`w-full h-auto aspect-square ${partner.imageBgColor} mb-6 rounded-3xl flex items-center justify-center overflow-hidden`}>
-                                <img src={partner.image} alt={partner.name} className="w-full h-full object-contain p-4"/>
+                            <div className="w-full h-auto aspect-square mb-6 rounded-3xl flex items-center justify-center overflow-hidden">
+                                <img src={partner.image} alt={partner.name} className="w-full h-full object-cover"/>
                             </div>
                             <h3 className={`text-lg md:text-xl font-light ${partner.titleColor}`}>{partner.name}</h3>
                 </div>
