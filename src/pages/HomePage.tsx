@@ -199,6 +199,8 @@ const Slider = () => {
                 valueColor: 'text-brand-black',
                 linkColor: 'text-brand-black',
                 imageBgColor: 'bg-white',
+                buttonHoverBg: 'hover:bg-brand-black',
+                buttonHoverText: 'hover:text-white'
             },
             {
                 ...projects[1],
@@ -208,15 +210,19 @@ const Slider = () => {
                 valueColor: 'text-brand-black',
                 linkColor: 'text-brand-black',
                 imageBgColor: 'bg-white',
+                buttonHoverBg: 'hover:bg-custom-grey',
+                buttonHoverText: ''
             },
             {
                 ...projects[2],
                 bgColor: 'bg-custom-grey',
                 titleColor: 'text-brand-black',
-                labelColor: 'text-gray-500',
+                labelColor: 'text-brand-black/80',
                 valueColor: 'text-brand-black',
                 linkColor: 'text-custom-red',
                 imageBgColor: 'bg-white',
+                buttonHoverBg: 'hover:bg-custom-red',
+                buttonHoverText: 'hover:text-white'
             }
         ];
 
@@ -254,7 +260,7 @@ const Slider = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full hover:bg-white/20 transition-colors ${project.linkColor}`}>Подробнее</a>
+                                <a href="#" className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors ${project.linkColor} ${project.buttonHoverBg} ${project.buttonHoverText}`}>Подробнее</a>
                           </div>
                         ))}
                       </div>
@@ -298,8 +304,8 @@ const Slider = () => {
         ];
 
         const projectCardStyles = [
-            { bgColor: 'bg-custom-red', titleColor: 'text-white', descriptionColor: 'text-white/80', buttonColor: 'text-white', buttonHover: 'hover:bg-white/20' },
-            { bgColor: 'bg-custom-blue', titleColor: 'text-white', descriptionColor: 'text-white/80', buttonColor: 'text-white', buttonHover: 'hover:bg-white/20' },
+            { bgColor: 'bg-custom-red', titleColor: 'text-brand-black', descriptionColor: 'text-brand-black/80', buttonColor: 'text-brand-black', buttonHover: 'hover:bg-brand-black hover:text-white' },
+            { bgColor: 'bg-custom-blue', titleColor: 'text-custom-grey', descriptionColor: 'text-brand-black/80', buttonColor: 'text-brand-black', buttonHover: 'hover:bg-custom-grey' },
             { bgColor: 'bg-custom-grey', titleColor: 'text-brand-black', descriptionColor: 'text-brand-black/80', buttonColor: 'text-custom-red', buttonHover: 'hover:bg-custom-red hover:text-white' },
         ];
 
@@ -404,7 +410,7 @@ const Slider = () => {
                         {stepBlocks.map((step, index) => (
                             <div key={index} className={`p-6 md:p-8 rounded-3xl ${step.bgColor}`}>
                                 <div className="w-full h-auto aspect-square bg-gray-100 mb-8 rounded-3xl overflow-hidden">
-                                    <img src={images[index % images.length]} alt={step.title} className="w-full h-full object-cover" />
+                                    <img src={images[(index + 1) % 3]} alt={step.title} className="w-full h-full object-cover" />
                                 </div>
                                 <div className={`font-light font-n27 text-5xl mb-6 ${step.numberColor}`}>0{index + 1}</div>
                                 <h3 className={`text-2xl md:text-3xl font-light mb-3 ${step.titleColor}`}>{step.title}</h3>
@@ -488,7 +494,7 @@ const Slider = () => {
                             {itemBlocks.map((item, index) => (
                                 <div key={index} className={`flex items-start space-x-6 p-6 rounded-3xl ${item.bgColor}`}>
                                     <div className="w-32 h-32 md:w-48 md:h-48 bg-white rounded-lg flex-shrink-0 overflow-hidden">
-                                        <img src={images[index % images.length]} alt={item.title} className="w-full h-full object-cover" />
+                                        <img src={images[(index + 1) % 3]} alt={item.title} className="w-full h-full object-cover" />
                                     </div>
                                     <div>
                                         <h3 className={`text-xl md:text-2xl font-light mb-2 ${item.titleColor}`}>{item.title}</h3>
