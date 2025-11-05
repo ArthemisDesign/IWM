@@ -91,7 +91,7 @@ const Slider = () => {
                 <h1 className={`text-3xl sm:text-4xl md:text-6xl font-light mb-6 leading-tight transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-200'} ${slides[currentSlide].titleColor || 'text-brand-black'}`}>
                     {slides[currentSlide].title}
               </h1>
-                <p className={`text-sm md:text-base mb-10 max-w-3xl transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-300'} ${slides[currentSlide].subtitleColor || 'text-gray-600'}`}>
+                <p className={`text-base mb-10 max-w-3xl transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 translate-y-5' : 'opacity-100 translate-y-0 delay-300'} ${slides[currentSlide].subtitleColor || 'text-gray-600'}`}>
                     {slides[currentSlide].subtitle}
                   </p>
                 </div>
@@ -306,7 +306,7 @@ const Slider = () => {
         const projectCardStyles = [
             { bgColor: 'bg-custom-red', titleColor: 'text-brand-black', descriptionColor: 'text-brand-black/80', buttonColor: 'text-brand-black', buttonHover: 'hover:bg-brand-black hover:text-white' },
             { bgColor: 'bg-custom-blue', titleColor: 'text-custom-grey', descriptionColor: 'text-brand-black/80', buttonColor: 'text-brand-black', buttonHover: 'hover:bg-custom-grey' },
-            { bgColor: 'bg-custom-grey', titleColor: 'text-brand-black', descriptionColor: 'text-brand-black/80', buttonColor: 'text-custom-red', buttonHover: 'hover:bg-custom-red hover:text-white' },
+            { bgColor: 'bg-custom-grey', titleColor: 'text-custom-red', descriptionColor: 'text-brand-black/80', buttonColor: 'text-custom-red', buttonHover: 'hover:bg-custom-red hover:text-white' },
         ];
 
         const images = [
@@ -338,7 +338,7 @@ const Slider = () => {
                                         <img src={images[index % images.length]} alt={project.title} className="w-full h-full object-cover" />
                                     </div>
                                     <h3 className={`font-medium text-2xl md:text-3xl mb-3 ${style.titleColor}`}>{project.title}</h3>
-                                    <p className={`text-base md:text-lg mb-6 ${style.descriptionColor}`}>{project.description}</p>
+                                    <p className={`text-base mb-6 ${style.descriptionColor}`}>{project.description}</p>
                                 </div>
                                 <button className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors ${style.buttonColor} ${style.buttonHover}`}>Подробнее</button>
                           </div>
@@ -414,7 +414,7 @@ const Slider = () => {
                                 </div>
                                 <div className={`font-light font-n27 text-5xl mb-6 ${step.numberColor}`}>0{index + 1}</div>
                                 <h3 className={`text-2xl md:text-3xl font-light mb-3 ${step.titleColor}`}>{step.title}</h3>
-                                <p className={`text-base md:text-lg ${step.descriptionColor}`}>{step.description}</p>
+                                <p className={`text-base ${step.descriptionColor}`}>{step.description}</p>
                               </div>
                         ))}
                   </div>
@@ -479,11 +479,11 @@ const Slider = () => {
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                         <div className="text-center lg:text-left">
                             <h2 className="text-4xl md:text-6xl font-light mb-6">Почему IWM?</h2>
-                            <p className="text-lg md:text-xl text-custom-grey/80 mb-8">Мы делаем инвестиции доступными и надежными</p>
-                            <p className="text-base md:text-lg text-custom-grey mb-6">
+                            <p className="text-base text-custom-grey/80 mb-8">Мы делаем инвестиции доступными и надежными</p>
+                            <p className="text-base text-custom-grey mb-6">
                                 IWM – инвестиционный маркетплейс, предоставляющий частным инвесторам доступ к фондам и проектам, которые ранее были доступны только профессиональным участникам рынка.
                             </p>
-                            <p className="text-base md:text-lg text-custom-grey">
+                            <p className="text-base text-custom-grey">
                                 Разнообразие и диверсификация – широкий выбор инвестиционных инструментов для вашего портфеля.
                             </p>
                             <button className="mt-12 bg-custom-red text-white px-8 py-4 rounded-full font-light hover:brightness-125 transition-colors uppercase tracking-wider">
@@ -497,8 +497,8 @@ const Slider = () => {
                                         <img src={images[(index + 1) % 3]} alt={item.title} className="w-full h-full object-cover" />
                                     </div>
                                     <div>
-                                        <h3 className={`text-xl md:text-2xl font-light mb-2 ${item.titleColor}`}>{item.title}</h3>
-                                        <p className={`text-base md:text-lg ${item.descriptionColor}`}>{item.description}</p>
+                                        <h3 className={`text-2xl md:text-3xl font-light mb-2 ${item.titleColor}`}>{item.title}</h3>
+                                        <p className={`text-base ${item.descriptionColor}`}>{item.description}</p>
                                     </div>
                                 </div>
                             ))}
@@ -577,7 +577,7 @@ const Slider = () => {
                                         <img src={images[(index + 3) % images.length]} alt={tier.title} className="w-full h-full object-cover" />
                                     </div>
                                     <h3 className={`text-2xl md:text-3xl font-light mb-4 ${tier.titleColor}`}>{tier.title}</h3>
-                                    <p className={`text-base md:text-lg mb-6 ${tier.descriptionColor}`}>{tier.description}</p>
+                                    <p className={`text-base mb-6 ${tier.descriptionColor}`}>{tier.description}</p>
                                 </div>
                                 <a href="#" className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors ${tier.linkColor} hover:bg-custom-red hover:text-white`}>{ "Узнать больше" }</a>
                   </div>
@@ -625,7 +625,7 @@ const Slider = () => {
             <div className="container mx-auto px-6 text-center md:text-left">
                     <div className="max-w-2xl mb-10 md:mb-16">
                         <h2 className="text-4xl md:text-6xl font-light">Партнеры IWM</h2>
-                        <p className="mt-4 text-lg md:text-xl text-gray-600">Мы работаем с лучшими</p>
+                        <p className="mt-4 text-base text-gray-600">Мы работаем с лучшими</p>
           </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
                     {partnerBlocks.map((partner, index) => (
@@ -720,13 +720,13 @@ const News = () => {
           <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
             <div className="text-center md:text-left">
               <h2 className="text-4xl md:text-5xl font-light leading-tight">Будьте в курсе лучших инвест-идей</h2>
-              <p className="mt-8 text-base md:text-lg text-gray-600">Ежедневная аналитика и инсайты, которые помогут принимать взвешенные инвестиционные решения.</p>
-              <p className="mt-6 text-base md:text-lg text-gray-600">Получайте отборные рыночные обзоры, перспективные идеи и стратегические прогнозы от экспертов IWM. Только проверенные данные, без шума и лишней информации. Подпишитесь и инвестируйте с уверенностью в каждом шаге.</p>
-              <p className="mt-10 text-brand-black text-base md:text-lg"><span className="font-bold font-n27">9 000+</span> подписчиков с нами – мы делимся только тем, что используем сами.</p>
+              <p className="mt-8 text-base text-gray-600">Ежедневная аналитика и инсайты, которые помогут принимать взвешенные инвестиционные решения.</p>
+              <p className="mt-6 text-base text-gray-600">Получайте отборные рыночные обзоры, перспективные идеи и стратегические прогнозы от экспертов IWM. Только проверенные данные, без шума и лишней информации. Подпишитесь и инвестируйте с уверенностью в каждом шаге.</p>
+              <p className="mt-10 text-brand-black text-base"><span className="font-bold font-n27">9 000+</span> подписчиков с нами – мы делимся только тем, что используем сами.</p>
             </div>
             <div className="flex flex-col justify-center">
                 <div className="space-y-4">
-                    <p className="text-brand-black font-light text-lg">Преимущества подписки:</p>
+                    <p className="text-brand-black font-light text-base">Преимущества подписки:</p>
                     <div className="flex flex-wrap gap-3">
                         <span className="bg-gray-100 text-brand-black px-4 py-2 text-sm font-light rounded-md">Актуальные тренды рынков</span>
                         <span className="bg-gray-100 text-brand-black px-4 py-2 text-sm font-light rounded-md">Рабочие идеи для роста капитала</span>
