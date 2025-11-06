@@ -497,7 +497,7 @@ const Slider = () => {
                                         <img src={images[(index + 1) % 3]} alt={item.title} className="w-full h-full object-cover" />
                                     </div>
                                     <div>
-                                        <h3 className={`text-2xl md:text-3xl font-light mb-2 ${item.titleColor}`}>{item.title}</h3>
+                                        <h3 className={`text-2xl md:text-3xl font-medium mb-2 ${item.titleColor}`}>{item.title}</h3>
                                         <p className={`text-base ${item.descriptionColor}`}>{item.description}</p>
                                     </div>
                                 </div>
@@ -532,21 +532,27 @@ const Slider = () => {
                 bgColor: 'bg-custom-red',
                 titleColor: 'text-white',
                 descriptionColor: 'text-white/80',
-                linkColor: 'text-white'
+                linkColor: 'text-white',
+                hoverBgColor: 'hover:bg-brand-black',
+                hoverTextColor: 'hover:text-white'
             },
             {
                 ...tiers[1],
                 bgColor: 'bg-custom-blue',
                 titleColor: 'text-white',
                 descriptionColor: 'text-white/80',
-                linkColor: 'text-white'
+                linkColor: 'text-white',
+                hoverBgColor: 'hover:bg-custom-grey',
+                hoverTextColor: 'hover:text-brand-black'
             },
             {
                 ...tiers[2],
                 bgColor: 'bg-custom-grey',
                 titleColor: 'text-brand-black',
                 descriptionColor: 'text-brand-black/80',
-                linkColor: 'text-custom-red'
+                linkColor: 'text-custom-red',
+                hoverBgColor: 'hover:bg-custom-red',
+                hoverTextColor: 'hover:text-white'
             }
         ];
 
@@ -579,7 +585,7 @@ const Slider = () => {
                                     <h3 className={`text-2xl md:text-3xl font-light mb-4 ${tier.titleColor}`}>{tier.title}</h3>
                                     <p className={`text-base mb-6 ${tier.descriptionColor}`}>{tier.description}</p>
                                 </div>
-                                <a href="#" className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors ${tier.linkColor} hover:bg-custom-red hover:text-white`}>{ "Узнать больше" }</a>
+                                <a href="#" className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors ${tier.linkColor} ${tier.hoverBgColor} ${tier.hoverTextColor}`}>{ "Узнать больше" }</a>
                   </div>
                 ))}
             </div>
