@@ -138,8 +138,8 @@ const Slider = () => {
         {
           ...stats[0],
           bgColor: 'bg-custom-red',
-          textColor: 'text-white',
-          labelColor: 'text-white/80',
+          textColor: 'text-brand-black',
+          labelColor: 'text-brand-black/80',
         },
         {
           ...stats[1],
@@ -150,8 +150,8 @@ const Slider = () => {
         {
           ...stats[2],
           bgColor: 'bg-custom-grey',
-          textColor: 'text-brand-black',
-          labelColor: 'text-gray-500',
+          textColor: 'text-custom-red',
+          labelColor: 'text-custom-red',
         }
       ];
 
@@ -193,6 +193,19 @@ const Slider = () => {
         const projectBlocks = [
             {
                 ...projects[0],
+                bgColor: 'bg-brand-black',
+                titleColor: 'text-custom-grey',
+                labelColor: 'text-custom-grey',
+                valueColor: 'text-custom-grey',
+                linkColor: 'text-custom-grey',
+                imageBgColor: 'bg-white',
+                buttonHoverBg: 'hover:bg-custom-grey',
+                buttonHoverText: 'hover:text-brand-black',
+                dividerColor: 'border-custom-grey',
+                buttonBorderColor: 'border-custom-grey'
+            },
+            {
+                ...projects[1],
                 bgColor: 'bg-custom-red',
                 titleColor: 'text-brand-black',
                 labelColor: 'text-brand-black/80',
@@ -200,29 +213,22 @@ const Slider = () => {
                 linkColor: 'text-brand-black',
                 imageBgColor: 'bg-white',
                 buttonHoverBg: 'hover:bg-brand-black',
-                buttonHoverText: 'hover:text-white'
-            },
-            {
-                ...projects[1],
-                bgColor: 'bg-custom-blue',
-                titleColor: 'text-brand-black',
-                labelColor: 'text-brand-black/80',
-                valueColor: 'text-brand-black',
-                linkColor: 'text-brand-black',
-                imageBgColor: 'bg-white',
-                buttonHoverBg: 'hover:bg-custom-grey',
-                buttonHoverText: ''
+                buttonHoverText: 'hover:text-white',
+                dividerColor: 'border-brand-black',
+                buttonBorderColor: 'border-brand-black'
             },
             {
                 ...projects[2],
                 bgColor: 'bg-custom-grey',
-                titleColor: 'text-brand-black',
-                labelColor: 'text-brand-black/80',
-                valueColor: 'text-brand-black',
+                titleColor: 'text-custom-red',
+                labelColor: 'text-custom-red',
+                valueColor: 'text-custom-red',
                 linkColor: 'text-custom-red',
                 imageBgColor: 'bg-white',
                 buttonHoverBg: 'hover:bg-custom-red',
-                buttonHoverText: 'hover:text-white'
+                buttonHoverText: 'hover:text-white',
+                dividerColor: 'border-custom-red',
+                buttonBorderColor: 'border-custom-red'
             }
         ];
 
@@ -244,7 +250,8 @@ const Slider = () => {
                                     ) : (
                                         <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-3xl"></div>
                                     )}
-                                    <h3 className={`text-2xl md:text-3xl font-medium mb-4 ${project.titleColor}`}>{project.name}</h3>
+                                    <h3 className={`text-2xl md:text-3xl font-medium ${project.titleColor}`}>{project.name}</h3>
+                                    <div className={`border-t-2 ${project.dividerColor} my-4`}></div>
                                     <div className="mb-6 space-y-2">
                                         <div className="flex justify-between">
                                             <p className={`text-xl ${project.labelColor}`}>Риск:</p>
@@ -260,7 +267,7 @@ const Slider = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors ${project.linkColor} ${project.buttonHoverBg} ${project.buttonHoverText}`}>Подробнее</a>
+                                <a href="#" className={`mt-auto self-start font-light text-base uppercase tracking-wider px-5 py-1 rounded-full transition-colors border-2 bg-transparent ${project.linkColor} ${project.buttonBorderColor} ${project.buttonHoverBg} ${project.buttonHoverText}`}>Подробнее</a>
                           </div>
                         ))}
                       </div>
@@ -304,9 +311,9 @@ const Slider = () => {
         ];
 
         const projectCardStyles = [
-            { bgColor: 'bg-custom-red', titleColor: 'text-brand-black', descriptionColor: 'text-brand-black/80', buttonColor: 'text-brand-black', buttonHover: 'hover:bg-brand-black hover:text-white' },
-            { bgColor: 'bg-custom-blue', titleColor: 'text-custom-grey', descriptionColor: 'text-brand-black/80', buttonColor: 'text-brand-black', buttonHover: 'hover:bg-custom-grey' },
-            { bgColor: 'bg-custom-grey', titleColor: 'text-custom-red', descriptionColor: 'text-brand-black/80', buttonColor: 'text-custom-red', buttonHover: 'hover:bg-custom-red hover:text-white' },
+            { bgColor: 'bg-custom-red', titleColor: 'text-brand-black', descriptionColor: 'text-brand-black/80', buttonColor: 'text-brand-black', buttonHover: 'hover:bg-brand-black hover:text-white', dividerColor: 'border-brand-black', buttonBorderColor: 'border-brand-black' },
+            { bgColor: 'bg-custom-blue', titleColor: 'text-custom-grey', descriptionColor: 'text-custom-grey', buttonColor: 'text-custom-grey', buttonHover: 'hover:bg-custom-grey hover:text-brand-black', dividerColor: 'border-custom-grey', buttonBorderColor: 'border-custom-grey' },
+            { bgColor: 'bg-custom-grey', titleColor: 'text-custom-red', descriptionColor: 'text-custom-red', buttonColor: 'text-custom-red', buttonHover: 'hover:bg-custom-red hover:text-white', dividerColor: 'border-custom-red', buttonBorderColor: 'border-custom-red' },
         ];
 
         const images = [
@@ -338,9 +345,10 @@ const Slider = () => {
                                         <img src={images[index % images.length]} alt={project.title} className="w-full h-full object-cover" />
                                     </div>
                                     <h3 className={`font-medium text-2xl md:text-3xl mb-3 ${style.titleColor}`}>{project.title}</h3>
+                                    <div className={`border-t-2 ${style.dividerColor} my-4`}></div>
                                     <p className={`text-base mb-6 ${style.descriptionColor}`}>{project.description}</p>
                                 </div>
-                                <button className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors ${style.buttonColor} ${style.buttonHover}`}>Подробнее</button>
+                                <button className={`mt-auto self-start font-light text-base uppercase tracking-wider px-5 py-1 rounded-full transition-colors border-2 bg-transparent ${style.buttonColor} ${style.buttonBorderColor} ${style.buttonHover}`}>Подробнее</button>
                           </div>
                         )})}
               </div>
@@ -384,9 +392,9 @@ const Slider = () => {
             {
                 ...steps[2],
                 bgColor: 'bg-custom-grey',
-                numberColor: 'text-brand-black/50',
-                titleColor: 'text-brand-black',
-                descriptionColor: 'text-brand-black/80'
+                numberColor: 'text-custom-red',
+                titleColor: 'text-custom-red',
+                descriptionColor: 'text-custom-red'
             }
         ];
 
@@ -445,19 +453,22 @@ const Slider = () => {
                 ...items[0],
                 bgColor: 'bg-custom-red',
                 titleColor: 'text-white',
-                descriptionColor: 'text-white/80'
+                descriptionColor: 'text-white/80',
+                dividerColor: 'border-white'
             },
             {
                 ...items[1],
                 bgColor: 'bg-custom-blue',
                 titleColor: 'text-white',
-                descriptionColor: 'text-white/80'
+                descriptionColor: 'text-white/80',
+                dividerColor: 'border-white'
             },
             {
                 ...items[2],
                 bgColor: 'bg-custom-grey',
-                titleColor: 'text-brand-black',
-                descriptionColor: 'text-brand-black/80'
+                titleColor: 'text-custom-red',
+                descriptionColor: 'text-custom-red',
+                dividerColor: 'border-custom-red'
             }
         ];
 
@@ -497,7 +508,8 @@ const Slider = () => {
                                         <img src={images[(index + 1) % 3]} alt={item.title} className="w-full h-full object-cover" />
                                     </div>
                                     <div>
-                                        <h3 className={`text-2xl md:text-3xl font-medium mb-2 ${item.titleColor}`}>{item.title}</h3>
+                                        <h3 className={`text-2xl md:text-3xl font-medium ${item.titleColor}`}>{item.title}</h3>
+                                        <div className={`border-t-2 ${item.dividerColor} my-4`}></div>
                                         <p className={`text-base ${item.descriptionColor}`}>{item.description}</p>
                                     </div>
                                 </div>
@@ -530,29 +542,35 @@ const Slider = () => {
             {
                 ...tiers[0],
                 bgColor: 'bg-custom-red',
-                titleColor: 'text-white',
-                descriptionColor: 'text-white/80',
-                linkColor: 'text-white',
+                titleColor: 'text-brand-black',
+                descriptionColor: 'text-brand-black/80',
+                linkColor: 'text-brand-black',
                 hoverBgColor: 'hover:bg-brand-black',
-                hoverTextColor: 'hover:text-white'
+                hoverTextColor: 'hover:text-white',
+                dividerColor: 'border-brand-black',
+                buttonBorderColor: 'border-brand-black'
             },
             {
                 ...tiers[1],
                 bgColor: 'bg-custom-blue',
-                titleColor: 'text-white',
-                descriptionColor: 'text-white/80',
-                linkColor: 'text-white',
+                titleColor: 'text-custom-grey',
+                descriptionColor: 'text-custom-grey',
+                linkColor: 'text-custom-grey',
                 hoverBgColor: 'hover:bg-custom-grey',
-                hoverTextColor: 'hover:text-brand-black'
+                hoverTextColor: 'hover:text-brand-black',
+                dividerColor: 'border-custom-grey',
+                buttonBorderColor: 'border-custom-grey'
             },
             {
                 ...tiers[2],
                 bgColor: 'bg-custom-grey',
-                titleColor: 'text-brand-black',
-                descriptionColor: 'text-brand-black/80',
+                titleColor: 'text-custom-red',
+                descriptionColor: 'text-custom-red',
                 linkColor: 'text-custom-red',
                 hoverBgColor: 'hover:bg-custom-red',
-                hoverTextColor: 'hover:text-white'
+                hoverTextColor: 'hover:text-white',
+                dividerColor: 'border-custom-red',
+                buttonBorderColor: 'border-custom-red'
             }
         ];
 
@@ -582,10 +600,11 @@ const Slider = () => {
                                     <div className="w-full h-auto aspect-square bg-gray-100 rounded-3xl overflow-hidden mb-6">
                                         <img src={images[(index + 3) % images.length]} alt={tier.title} className="w-full h-full object-cover" />
                                     </div>
-                                    <h3 className={`text-2xl md:text-3xl font-light mb-4 ${tier.titleColor}`}>{tier.title}</h3>
+                                    <h3 className={`text-2xl md:text-3xl font-light ${tier.titleColor}`}>{tier.title}</h3>
+                                    <div className={`border-t-2 ${tier.dividerColor} my-4`}></div>
                                     <p className={`text-base mb-6 ${tier.descriptionColor}`}>{tier.description}</p>
                                 </div>
-                                <a href="#" className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors ${tier.linkColor} ${tier.hoverBgColor} ${tier.hoverTextColor}`}>{ "Узнать больше" }</a>
+                                <a href="#" className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors border-2 bg-transparent ${tier.linkColor} ${tier.buttonBorderColor} ${tier.hoverBgColor} ${tier.hoverTextColor}`}>{ "Узнать больше" }</a>
                   </div>
                 ))}
             </div>
@@ -606,23 +625,23 @@ const Slider = () => {
         const partnerBlocks = [
             {
                 ...partners[0],
-                bgColor: 'bg-custom-red',
+                bgColor: 'bg-brand-black',
                 titleColor: 'text-white',
             },
             {
                 ...partners[1],
-                bgColor: 'bg-custom-blue',
+                bgColor: 'bg-custom-red',
                 titleColor: 'text-white',
             },
             {
                 ...partners[2],
-                bgColor: 'bg-custom-grey',
-                titleColor: 'text-brand-black',
+                bgColor: 'bg-custom-blue',
+                titleColor: 'text-white',
             },
             {
                 ...partners[3],
-                bgColor: 'bg-brand-black',
-                titleColor: 'text-white',
+                bgColor: 'bg-custom-grey',
+                titleColor: 'text-brand-black',
             }
         ];
 
@@ -660,20 +679,29 @@ const News = () => {
             {
                 ...articles[0],
                 bgColor: 'bg-custom-red',
-                titleColor: 'text-white',
-                linkColor: 'text-white'
+                titleColor: 'text-brand-black',
+                linkColor: 'text-brand-black',
+                buttonBorderColor: 'border-brand-black',
+                buttonHoverBg: 'hover:bg-brand-black',
+                buttonHoverText: 'hover:text-white'
             },
             {
                 ...articles[1],
                 bgColor: 'bg-custom-blue',
-                titleColor: 'text-white',
-                linkColor: 'text-white'
+                titleColor: 'text-custom-grey',
+                linkColor: 'text-custom-grey',
+                buttonBorderColor: 'border-custom-grey',
+                buttonHoverBg: 'hover:bg-custom-grey',
+                buttonHoverText: 'hover:text-brand-black'
             },
             {
                 ...articles[2],
                 bgColor: 'bg-custom-grey',
-                titleColor: 'text-brand-black',
-                linkColor: 'text-custom-red'
+                titleColor: 'text-custom-red',
+                linkColor: 'text-custom-red',
+                buttonBorderColor: 'border-custom-red',
+                buttonHoverBg: 'hover:bg-custom-red',
+                buttonHoverText: 'hover:text-white'
             }
         ];
 
@@ -711,7 +739,7 @@ const News = () => {
                                 <img src={images[(index % 3) + 6]} alt={article.title} className="w-full h-full object-cover" />
                             </div>
                             <h3 className={`text-xl md:text-2xl font-light leading-tight mb-4 ${article.titleColor}`}>{article.title}</h3>
-                            <a href="#" className={`inline-block font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full hover:bg-white/20 transition-colors ${article.linkColor}`}>Узнать больше</a>
+                            <a href="#" className={`inline-block font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors border-2 bg-transparent ${article.linkColor} ${article.buttonBorderColor} ${article.buttonHoverBg} ${article.buttonHoverText}`}>Узнать больше</a>
                         </div>
                     ))}
                 </Marquee>
