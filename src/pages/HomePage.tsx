@@ -190,7 +190,7 @@ const Slider = () => {
             { name: 'AIFC', risk: 'высокий', term: '6 мес.', minAmount: '$200', image: '/partners/Rectangle 913.png' },
         ];
 
-        const projectBlocks = [
+        const initialProjectBlocks = [
             {
                 ...projects[0],
                 bgColor: 'bg-brand-black',
@@ -232,6 +232,31 @@ const Slider = () => {
             }
         ];
 
+        const [projectBlocks, setProjectBlocks] = useState(initialProjectBlocks);
+        const [isSliding, setIsSliding] = useState(false);
+
+        const slide = (direction: 'next' | 'prev') => {
+            if (isSliding) return;
+            setIsSliding(true);
+            setTimeout(() => {
+                setProjectBlocks(prevBlocks => {
+                    const newBlocks = [...prevBlocks];
+                    if (direction === 'next') {
+                        const first = newBlocks.shift();
+                        if (first) newBlocks.push(first);
+                    } else {
+                        const last = newBlocks.pop();
+                        if (last) newBlocks.unshift(last);
+                    }
+                    return newBlocks;
+                });
+                setIsSliding(false);
+            }, 500);
+        };
+
+        const nextProject = () => slide('next');
+        const prevProject = () => slide('prev');
+
         return (
             <section className="bg-white py-12 md:py-24">
                 <div className="container mx-auto px-6">
@@ -239,38 +264,46 @@ const Slider = () => {
                         <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Начать инвестировать</p>
                         <h2 className="text-4xl md:text-6xl font-light">Самые интересные предложения на сегодня</h2>
                   </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {projectBlocks.map((project, index) => (
-                            <div key={index} className={`flex flex-col p-6 md:p-8 rounded-3xl ${project.bgColor}`}>
-                                <div>
-                                    {project.image ? (
-                                        <div className={`w-full h-auto aspect-square ${project.imageBgColor} mb-6 rounded-3xl flex items-center justify-center overflow-hidden`}>
-                                            <img src={project.image} alt={project.name} className="w-full h-full object-contain" />
-                                        </div>
-                                    ) : (
-                                        <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-3xl"></div>
-                                    )}
-                                    <h3 className={`text-2xl md:text-3xl font-medium ${project.titleColor}`}>{project.name}</h3>
-                                    <div className={`border-t-2 ${project.dividerColor} my-4`}></div>
-                                    <div className="mb-6 space-y-2">
-                                        <div className="flex justify-between">
-                                            <p className={`text-xl ${project.labelColor}`}>Риск:</p>
-                                            <p className={`text-2xl font-light ${project.valueColor}`}>{project.risk}</p>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <p className={`text-xl ${project.labelColor}`}>Срок:</p>
-                                            <p className={`text-2xl font-light font-n27 ${project.valueColor}`}>{project.term}</p>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <p className={`text-xl ${project.labelColor}`}>Мин. сумма:</p>
-                                            <p className={`text-2xl font-light font-n27 ${project.valueColor}`}>{project.minAmount}</p>
+                    <div className="flex items-center justify-center -mx-4">
+                        <button onClick={prevProject} className="w-12 h-12 rounded-full border-2 border-brand-black flex items-center justify-center hover:bg-gray-100 transition-colors flex-shrink-0">
+                            <ChevronLeft size={24} className="text-brand-black" />
+                        </button>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full px-4">
+                            {projectBlocks.map((project, index) => (
+                                <div key={project.name} className={`flex flex-col p-6 md:p-8 rounded-3xl ${project.bgColor} transition-all duration-500 ease-in-out ${isSliding ? 'opacity-0' : 'opacity-100'}`}>
+                                    <div>
+                                        {project.image ? (
+                                            <div className={`w-full h-auto aspect-square ${project.imageBgColor} mb-6 rounded-3xl flex items-center justify-center overflow-hidden`}>
+                                                <img src={project.image} alt={project.name} className="w-full h-full object-contain" />
+                                            </div>
+                                        ) : (
+                                            <div className="w-full h-auto aspect-square bg-gray-100 mb-6 rounded-3xl"></div>
+                                        )}
+                                        <h3 className={`text-2xl md:text-3xl font-medium ${project.titleColor}`}>{project.name}</h3>
+                                        <div className={`border-t-2 ${project.dividerColor} my-4`}></div>
+                                        <div className="mb-6 space-y-2">
+                                            <div className="flex justify-between">
+                                                <p className={`text-xl ${project.labelColor}`}>Риск:</p>
+                                                <p className={`text-2xl font-light ${project.valueColor}`}>{project.risk}</p>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <p className={`text-xl ${project.labelColor}`}>Срок:</p>
+                                                <p className={`text-2xl font-light font-n27 ${project.valueColor}`}>{project.term}</p>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <p className={`text-xl ${project.labelColor}`}>Мин. сумма:</p>
+                                                <p className={`text-2xl font-light font-n27 ${project.valueColor}`}>{project.minAmount}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <a href="#" className={`mt-auto self-start font-light text-base uppercase tracking-wider px-5 py-1 rounded-full transition-colors border-2 bg-transparent ${project.linkColor} ${project.buttonBorderColor} ${project.buttonHoverBg} ${project.buttonHoverText}`}>Подробнее</a>
+                                    <a href="#" className={`mt-auto self-start font-light text-base uppercase tracking-wider px-5 py-1 rounded-full transition-colors border-2 bg-transparent ${project.linkColor} ${project.buttonBorderColor} ${project.buttonHoverBg} ${project.buttonHoverText}`}>Подробнее</a>
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
+                          <button onClick={nextProject} className="w-12 h-12 rounded-full border-2 border-brand-black flex items-center justify-center hover:bg-gray-100 transition-colors flex-shrink-0">
+                            <ChevronRight size={24} className="text-brand-black" />
+                        </button>
+                    </div>
                     <div className="text-center md:text-left mt-12 md:mt-20">
                         <button className="bg-brand-black text-white px-8 py-4 rounded-full font-light hover:brightness-125 transition-colors uppercase tracking-wider">
                             Смотреть все проекты
@@ -378,9 +411,9 @@ const Slider = () => {
             {
                 ...steps[0],
                 bgColor: 'bg-custom-red',
-                numberColor: 'text-white/80',
-                titleColor: 'text-white',
-                descriptionColor: 'text-white/80'
+                numberColor: 'text-brand-black/80',
+                titleColor: 'text-brand-black',
+                descriptionColor: 'text-brand-black/80'
             },
             {
                 ...steps[1],
@@ -604,7 +637,7 @@ const Slider = () => {
                                     <div className={`border-t-2 ${tier.dividerColor} my-4`}></div>
                                     <p className={`text-base mb-6 ${tier.descriptionColor}`}>{tier.description}</p>
                                 </div>
-                                <a href="#" className={`mt-auto self-start font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors border-2 bg-transparent ${tier.linkColor} ${tier.buttonBorderColor} ${tier.hoverBgColor} ${tier.hoverTextColor}`}>{ "Узнать больше" }</a>
+                                <a href="#" className={`mt-auto self-start font-light text-base uppercase tracking-wider px-5 py-1 rounded-full transition-colors border-2 bg-transparent ${tier.linkColor} ${tier.buttonBorderColor} ${tier.hoverBgColor} ${tier.hoverTextColor}`}>{ "Узнать больше" }</a>
                   </div>
                 ))}
             </div>
@@ -739,7 +772,7 @@ const News = () => {
                                 <img src={images[(index % 3) + 6]} alt={article.title} className="w-full h-full object-cover" />
                             </div>
                             <h3 className={`text-xl md:text-2xl font-light leading-tight mb-4 ${article.titleColor}`}>{article.title}</h3>
-                            <a href="#" className={`inline-block font-light text-lg md:text-xl uppercase tracking-wider px-6 py-2 rounded-full transition-colors border-2 bg-transparent ${article.linkColor} ${article.buttonBorderColor} ${article.buttonHoverBg} ${article.buttonHoverText}`}>Узнать больше</a>
+                            <a href="#" className={`inline-block font-light text-base uppercase tracking-wider px-5 py-1 rounded-full transition-colors border-2 bg-transparent ${article.linkColor} ${article.buttonBorderColor} ${article.buttonHoverBg} ${article.buttonHoverText}`}>Узнать больше</a>
                         </div>
                     ))}
                 </Marquee>
