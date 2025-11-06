@@ -633,7 +633,7 @@ const Slider = () => {
                             <div className="w-full h-auto aspect-square mb-6 rounded-3xl flex items-center justify-center overflow-hidden">
                                 <img src={partner.image} alt={partner.name} className="w-full h-full object-cover"/>
                             </div>
-                            <h3 className={`text-lg md:text-xl font-light ${partner.titleColor}`}>{partner.name}</h3>
+                            <h3 className={`text-lg md:text-xl font-medium ${partner.titleColor}`}>{partner.name}</h3>
                 </div>
               ))}
           </div>
