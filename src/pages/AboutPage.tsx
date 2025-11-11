@@ -113,44 +113,87 @@ const AboutPage = () => {
             <h2 className="text-3xl md:text-5xl font-light">Дорожная карта</h2>
             <p className="text-lg text-white/80 mt-2">Наш путь к глобальной платформе инвестиций</p>
           </div>
-          <div className="relative border-l-2 border-gray-700 ml-6">
-            <div className="mb-8 ml-6">
-              <div className="absolute -left-3 w-6 h-6 bg-custom-red rounded-full"></div>
-              <h4 className="text-xl font-bold text-custom-red">2025 – запуск</h4>
-              <ul className="list-disc list-inside mt-2 text-white/80">
-                <li>Запуск MVP платформы</li>
-                <li>Первые листинги инвестиционных проектов</li>
-                <li>Привлечение ранних инвесторов и партнеров</li>
-              </ul>
-            </div>
-            <div className="mb-8 ml-6">
-              <div className="absolute -left-3 w-6 h-6 bg-gray-600 rounded-full"></div>
-              <h4 className="text-xl font-bold">2026 – масштабирование</h4>
-              <ul className="list-disc list-inside mt-2 text-white/80">
-                <li>Запуск мобильного приложения</li>
-                <li>Добавление токенизированных активов</li>
-                <li>Выход на рынки ЕС и Ближнего Востока</li>
-              </ul>
-            </div>
-            <div className="mb-8 ml-6">
-              <div className="absolute -left-3 w-6 h-6 bg-gray-600 rounded-full"></div>
-              <h4 className="text-xl font-bold">2027 – международная экспансия</h4>
-              <ul className="list-disc list-inside mt-2 text-white/80">
-                <li>Интеграция с глобальными платежными системами</li>
-                <li>Расширение базы пользователей до 1 млн+</li>
-                <li>Листинг первых крупных фондов на платформе</li>
-              </ul>
-            </div>
-            <div className="ml-6">
-              <div className="absolute -left-3 w-6 h-6 bg-gray-600 rounded-full"></div>
-              <h4 className="text-xl font-bold">2028+ - глобальный инвестиционный хаб</h4>
-              <ul className="list-disc list-inside mt-2 text-white/80">
-                <li>Поддержка сделок более чем в 50 странах</li>
-                <li>Расширенный функционал для институциональных инвесторов</li>
-                <li>Лидерство в сегменте цифровых частных инвестиций</li>
-              </ul>
+          
+          <div className="overflow-x-auto pb-8 -mx-6 px-6">
+            <div className="relative w-max mx-auto">
+              <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-700 -translate-y-1/2"></div>
+              <div className="flex">
+                {[
+                  {
+                    year: "2025",
+                    title: "запуск",
+                    points: [
+                      "Запуск MVP платформы",
+                      "Первые листинги инвестиционных проектов",
+                      "Привлечение ранних инвесторов и партнеров",
+                    ],
+                    active: true,
+                  },
+                  {
+                    year: "2026",
+                    title: "масштабирование",
+                    points: [
+                      "Запуск мобильного приложения",
+                      "Добавление токенизированных активов",
+                      "Выход на рынки ЕС и Ближнего Востока",
+                    ],
+                    active: false,
+                  },
+                  {
+                    year: "2027",
+                    title: "международная экспансия",
+                    points: [
+                      "Интеграция с глобальными платежными системами",
+                      "Расширение базы пользователей до 1 млн+",
+                      "Листинг первых крупных фондов на платформе",
+                    ],
+                    active: false,
+                  },
+                  {
+                    year: "2028+",
+                    title: "глобальный инвестиционный хаб",
+                    points: [
+                      "Поддержка сделок более чем в 50 странах",
+                      "Расширенный функционал для институциональных инвесторов",
+                      "Лидерство в сегменте цифровых частных инвестиций",
+                    ],
+                    active: false,
+                  },
+                ].map((item, index) => (
+                  <div key={index} className="relative flex flex-col items-center flex-shrink-0 px-8 md:px-12 py-8 w-80">
+                    <div className="text-center mb-auto h-48 flex flex-col justify-end">
+                      {index % 2 === 0 && (
+                        <div>
+                          <h4 className={`text-xl font-bold ${item.active ? 'text-custom-red' : ''}`}>{item.year} – {item.title}</h4>
+                          <ul className="mt-2 text-white/80 text-left text-sm space-y-1 pl-4">
+                            {item.points.map((point, i) => (
+                              <li key={i}>{point}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className={`w-4 h-4 rounded-full my-4 z-10 flex-shrink-0 ${item.active ? 'bg-custom-red' : 'bg-gray-600'}`}></div>
+                    
+                    <div className="text-center mt-auto h-48">
+                      {index % 2 !== 0 && (
+                        <div>
+                          <h4 className={`text-xl font-bold ${item.active ? 'text-custom-red' : ''}`}>{item.year} – {item.title}</h4>
+                          <ul className="mt-2 text-white/80 text-left text-sm space-y-1 pl-4">
+                            {item.points.map((point, i) => (
+                              <li key={i}>{point}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+
           <div className="text-center mt-12">
             <h3 className="text-2xl font-light">Вы можете стать частью нашего пути уже сегодня</h3>
             <button className="mt-4 bg-custom-red text-white px-8 py-3 rounded-full font-semibold hover:brightness-110 transition">Присоединиться к IWM</button>
