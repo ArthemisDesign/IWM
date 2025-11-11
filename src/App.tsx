@@ -3,11 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import { Menu, X } from 'lucide-react';
 import HomePage from './pages/HomePage';
 import BusinessPage from './pages/BusinessPage';
+import AboutPage from './pages/AboutPage';
 
 const navLinks = [
     { id: 'investors', path: '/', text: 'Для инвесторов' },
     { id: 'business', path: '/business', text: 'Для бизнеса' },
-    { id: 'about', path: '#about', text: 'О компании' },
+    { id: 'about', path: '/about', text: 'О компании' },
 ];
 
 // Header component
@@ -22,6 +23,9 @@ const Header = () => {
         }
         if (currentPath === '/') {
             return 'investors';
+        }
+        if (currentPath === '/about') {
+            return 'about';
         }
         // Add more checks if there are more pages
         return 'investors'; // default
@@ -100,6 +104,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/business" element={<BusinessPage />} />
+                    <Route path="/about" element={<AboutPage />} />
                 </Routes>
             </main>
         </div>
